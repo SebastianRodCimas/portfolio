@@ -21,7 +21,7 @@ class AnimatedImageContainerState extends State<AnimatedImageContainer>
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1000),
-    )..repeat(reverse: true); // Repeat the animation loop
+    )..repeat(reverse: true);
   }
 
   @override
@@ -37,7 +37,7 @@ class AnimatedImageContainerState extends State<AnimatedImageContainer>
       builder: (context, child) {
         final value = _controller.value;
         return Transform.translate(
-          offset: Offset(0, 2 * value), // Move the container up and down
+          offset: Offset(0, 2 * value),
           child: Container(
             height: widget.height!,
             width: widget.width!,

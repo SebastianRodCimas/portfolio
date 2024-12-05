@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/view/intro/components/social_media_list.dart';
 import '../../../res/constants.dart';
 import '../../../view model/responsive.dart';
 import 'animated_texts_componenets.dart';
@@ -7,6 +8,7 @@ import 'combine_subtitle.dart';
 import 'description_text.dart';
 import 'download_button.dart';
 import 'headline_text.dart';
+
 class IntroBody extends StatelessWidget {
   const IntroBody({super.key});
   @override
@@ -29,9 +31,27 @@ class IntroBody extends StatelessWidget {
                     SizedBox(
                       width: size.width * 0.23,
                     ),
-                    const AnimatedImageContainer(
-                      width: 150,
-                      height: 200,
+                    Column(
+                      children: [
+                        const Text(
+                          'Découvrez nos projets',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const AnimatedImageContainer(
+                          width: 150,
+                          height: 200,
+                        ),
+                        const Text(
+                          'Faites défiler pour en savoir plus',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -51,7 +71,7 @@ class IntroBody extends StatelessWidget {
                 ),
               const CombineSubtitleText(),
               const SizedBox(height: defaultPadding / 2),
-              const Responsive(
+              Responsive(
                 desktop: AnimatedDescriptionText(start: 14, end: 15),
                 largeMobile: AnimatedDescriptionText(start: 14, end: 12),
                 mobile: AnimatedDescriptionText(start: 14, end: 12),
@@ -65,7 +85,142 @@ class IntroBody extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        if (Responsive.isDesktop(context)) const AnimatedImageContainer(),
+        if (Responsive.isDesktop(context))
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'ABOUT ME',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: defaultPadding / 1),
+              const Text(
+                'I am a passionate developer with experience in various technologies.\nI love creating innovative solutions and working on challenging projects.',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: defaultPadding / 1),
+              GestureDetector(
+                onTap: () {
+                  // Navigate to another page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AboutDialog()),
+                  );
+                },
+                child: Row(
+                  children: [
+                    const Text(
+                      'LEARN MORE ',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                      size: 14,
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: defaultPadding / 1.5),
+
+              GestureDetector(
+                onTap: () {
+                  // Navigate to another page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AboutDialog()),
+                  );
+                },
+                child: Positioned(
+                  bottom: -2,
+                  left: 7,
+                  child: Container(
+                    width: 100, // Adjust the width as needed
+                    height: 6,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(height: defaultPadding), // Added spacing here
+              const AnimatedImageContainer(),
+              const SizedBox(height: defaultPadding),
+              const Text(
+                'ABOUT ME',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: defaultPadding / 1),
+              const Text(
+                'I am a passionate developer with experience in various technologies.\nI love creating innovative solutions and working on challenging projects.',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: defaultPadding / 1),
+              GestureDetector(
+                onTap: () {
+                  // Navigate to another page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AboutDialog()),
+                  );
+                },
+                child: Row(
+                  children: [
+                    const Text(
+                      'LEARN MORE ',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                      size: 14,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: defaultPadding / 1.5),
+              GestureDetector(
+                onTap: () {
+                  // Navigate to another page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AboutDialog()),
+                  );
+                },
+                child: Positioned(
+                  bottom: -2,
+                  left: 7,
+                  child: Container(
+                    width: 100, // Adjust the width as needed
+                    height: 6,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(height: defaultPadding / 2),
+            ],
+          ),
         const Spacer()
       ],
     );
