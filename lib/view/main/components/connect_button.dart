@@ -12,7 +12,7 @@ class ConnectButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: defaultPadding),
       child: InkWell(
         onTap: () {
-          launchUrl(Uri.parse('https://wa.me/0628685669'));
+          launchUrl(Uri.parse('tel:+33628685669'));
         },
         borderRadius: BorderRadius.circular(defaultPadding + 10),
         child: Container(
@@ -39,13 +39,13 @@ class ConnectButton extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Icon(
-                  FontAwesomeIcons.whatsapp,
+                  Icons.phone,
                   color: Colors.greenAccent,
                   size: 15,
                 ),
                 const SizedBox(width: defaultPadding / 4),
                 Text(
-                  'Whatsapp',
+                  '+33 6 28 68 56 69',
                   style: Theme.of(context).textTheme.labelSmall!.copyWith(
                       color: Colors.white,
                       letterSpacing: 1.2,

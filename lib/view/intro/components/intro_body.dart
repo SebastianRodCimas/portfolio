@@ -31,28 +31,6 @@ class IntroBody extends StatelessWidget {
                     SizedBox(
                       width: size.width * 0.23,
                     ),
-                    Column(
-                      children: [
-                        const Text(
-                          'Découvrez nos projets',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const AnimatedImageContainer(
-                          width: 150,
-                          height: 200,
-                        ),
-                        const Text(
-                          'Faites défiler pour en savoir plus',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               if (!Responsive.isDesktop(context))
