@@ -49,7 +49,7 @@ class IntroBody extends StatelessWidget {
                 ),
               const CombineSubtitleText(),
               const SizedBox(height: defaultPadding / 2),
-              Responsive(
+              const Responsive(
                 desktop: AnimatedDescriptionText(start: 14, end: 15),
                 largeMobile: AnimatedDescriptionText(start: 14, end: 12),
                 mobile: AnimatedDescriptionText(start: 14, end: 12),
@@ -77,7 +77,7 @@ class IntroBody extends StatelessWidget {
               ),
               const SizedBox(height: defaultPadding / 1),
               const Text(
-                'I am a passionate developer with experience in various technologies.\nI love creating innovative solutions and working on challenging projects.',
+                ' I enjoy project management, development, schema design, and beta testing analysis, \nand I love creating innovative solutions while working on challenging projects.',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey,
@@ -89,12 +89,13 @@ class IntroBody extends StatelessWidget {
                   // Navigate to another page
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AboutDialog()),
+                    MaterialPageRoute(
+                        builder: (context) => const AboutDialog()),
                   );
                 },
-                child: Row(
+                child: const Row(
                   children: [
-                    const Text(
+                    Text(
                       'LEARN MORE ',
                       style: TextStyle(
                         fontSize: 14,
@@ -102,7 +103,7 @@ class IntroBody extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    const Icon(
+                    Icon(
                       Icons.arrow_forward,
                       color: Colors.white,
                       size: 14,
@@ -118,7 +119,8 @@ class IntroBody extends StatelessWidget {
                   // Navigate to another page
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AboutDialog()),
+                    MaterialPageRoute(
+                        builder: (context) => const AboutDialog()),
                   );
                 },
                 child: Positioned(
@@ -135,7 +137,7 @@ class IntroBody extends StatelessWidget {
               const AnimatedImageContainer(),
               const SizedBox(height: defaultPadding),
               const Text(
-                'ABOUT ME',
+                'PRO EXPERIENCE',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white,
@@ -144,7 +146,7 @@ class IntroBody extends StatelessWidget {
               ),
               const SizedBox(height: defaultPadding / 1),
               const Text(
-                'I am a passionate developer with experience in various technologies.\nI love creating innovative solutions and working on challenging projects.',
+                'During 3 years of work-study, I worked with various systems  \nand diverse clientele, gaining adaptable and versatile experience',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey,
@@ -156,12 +158,13 @@ class IntroBody extends StatelessWidget {
                   // Navigate to another page
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AboutDialog()),
+                    MaterialPageRoute(
+                        builder: (context) => const AboutDialog()),
                   );
                 },
-                child: Row(
+                child: const Row(
                   children: [
-                    const Text(
+                    Text(
                       'LEARN MORE ',
                       style: TextStyle(
                         fontSize: 14,
@@ -169,7 +172,7 @@ class IntroBody extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    const Icon(
+                    Icon(
                       Icons.arrow_forward,
                       color: Colors.white,
                       size: 14,
@@ -183,7 +186,8 @@ class IntroBody extends StatelessWidget {
                   // Navigate to another page
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AboutDialog()),
+                    MaterialPageRoute(
+                        builder: (context) => const AboutDialog()),
                   );
                 },
                 child: Positioned(

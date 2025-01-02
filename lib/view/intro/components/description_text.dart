@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../view model/responsive.dart';
 
 class AnimatedDescriptionText extends StatelessWidget {
-  AnimatedDescriptionText({required this.start, required this.end});
+  const AnimatedDescriptionText(
+      {super.key, required this.start, required this.end});
   final double start;
   final double end;
 
