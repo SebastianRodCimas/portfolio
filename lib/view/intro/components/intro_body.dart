@@ -16,193 +16,186 @@ class IntroBody extends StatelessWidget {
     var size = MediaQuery.sizeOf(context);
     return Row(
       children: [
-        SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (!Responsive.isDesktop(context))
-                SizedBox(
-                  height: size.height * 0.06,
-                ),
-              if (!Responsive.isDesktop(context))
-                Row(
-                  children: [
-                    SizedBox(
-                      width: size.width * 0.23,
-                    ),
-                  ],
-                ),
-              if (!Responsive.isDesktop(context))
-                SizedBox(
-                  height: size.height * 0.1,
-                ),
-              const Responsive(
-                  desktop: MyPortfolioText(start: 40, end: 50),
-                  largeMobile: MyPortfolioText(start: 40, end: 35),
-                  mobile: MyPortfolioText(start: 35, end: 30),
-                  tablet: MyPortfolioText(start: 50, end: 40)),
-              if (kIsWeb && Responsive.isLargeMobile(context))
-                Container(
-                  height: defaultPadding,
-                  color: Colors.transparent,
-                ),
-              const CombineSubtitleText(),
-              const SizedBox(height: defaultPadding / 2),
-              const Responsive(
-                desktop: AnimatedDescriptionText(start: 14, end: 15),
-                largeMobile: AnimatedDescriptionText(start: 14, end: 12),
-                mobile: AnimatedDescriptionText(start: 14, end: 12),
-                tablet: AnimatedDescriptionText(start: 17, end: 14),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (!Responsive.isDesktop(context))
+              SizedBox(
+                height: size.height * 0.06,
               ),
-              const SizedBox(
-                height: defaultPadding * 2,
+            if (!Responsive.isDesktop(context))
+              Row(
+                children: [
+                  SizedBox(
+                    width: size.width * 0.23,
+                  ),
+                ],
               ),
-              const DownloadButton(),
-            ],
-          ),
+            if (!Responsive.isDesktop(context))
+              SizedBox(
+                height: size.height * 0.1,
+              ),
+            const Responsive(
+                desktop: MyPortfolioText(start: 40, end: 50),
+                largeMobile: MyPortfolioText(start: 40, end: 35),
+                mobile: MyPortfolioText(start: 35, end: 30),
+                tablet: MyPortfolioText(start: 50, end: 40)),
+            if (kIsWeb && Responsive.isLargeMobile(context))
+              Container(
+                height: defaultPadding,
+                color: Colors.transparent,
+              ),
+            const CombineSubtitleText(),
+            const SizedBox(height: defaultPadding / 2),
+            Responsive(
+              desktop: AnimatedDescriptionText(start: 14, end: 15),
+              largeMobile: AnimatedDescriptionText(start: 14, end: 12),
+              mobile: AnimatedDescriptionText(start: 14, end: 12),
+              tablet: AnimatedDescriptionText(start: 17, end: 14),
+            ),
+            const SizedBox(
+              height: defaultPadding * 2,
+            ),
+            const DownloadButton(),
+          ],
         ),
         const Spacer(),
-        if (Responsive.isDesktop(context))
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'ABOUT ME',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'ABOUT ME',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: defaultPadding / 1),
-              const Text(
-                ' I enjoy project management, development, schema design, and beta testing analysis, \nand I love creating innovative solutions while working on challenging projects.',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey,
-                ),
+            ),
+            const SizedBox(height: defaultPadding / 1),
+            const Text(
+              'I am a passionate developer with experience in various technologies.\nI love creating innovative solutions and working on challenging projects.',
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
               ),
-              const SizedBox(height: defaultPadding / 1),
-              GestureDetector(
-                onTap: () {
-                  // Navigate to another page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AboutDialog()),
-                  );
-                },
-                child: const Row(
-                  children: [
-                    Text(
-                      'LEARN MORE ',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
+            ),
+            const SizedBox(height: defaultPadding / 1),
+            GestureDetector(
+              onTap: () {
+                // Navigate to another page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AboutDialog()),
+                );
+              },
+              child: Row(
+                children: [
+                  const Text(
+                    'LEARN MORE ',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
                       color: Colors.white,
-                      size: 14,
                     ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: defaultPadding / 1.5),
-
-              GestureDetector(
-                onTap: () {
-                  // Navigate to another page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AboutDialog()),
-                  );
-                },
-                child: Positioned(
-                  bottom: -2,
-                  left: 7,
-                  child: Container(
-                    width: 100, // Adjust the width as needed
-                    height: 6,
-                    color: Colors.white,
                   ),
-                ),
+                  const Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                    size: 14,
+                  ),
+                ],
               ),
-              const SizedBox(height: defaultPadding), // Added spacing here
-              const AnimatedImageContainer(),
-              const SizedBox(height: defaultPadding),
-              const Text(
-                'PRO EXPERIENCE',
-                style: TextStyle(
-                  fontSize: 16,
+            ),
+
+            const SizedBox(height: defaultPadding / 1.5),
+
+            GestureDetector(
+              onTap: () {
+                // Navigate to another page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AboutDialog()),
+                );
+              },
+              child: Positioned(
+                bottom: -2,
+                left: 7,
+                child: Container(
+                  width: 100, // Adjust the width as needed
+                  height: 6,
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: defaultPadding / 1),
-              const Text(
-                'During 3 years of work-study, I worked with various systems  \nand diverse clientele, gaining adaptable and versatile experience',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey,
-                ),
+            ),
+            const SizedBox(height: defaultPadding), // Added spacing here
+            const AnimatedImageContainer(),
+            const SizedBox(height: defaultPadding),
+            const Text(
+              'ABOUT ME',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: defaultPadding / 1),
-              GestureDetector(
-                onTap: () {
-                  // Navigate to another page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AboutDialog()),
-                  );
-                },
-                child: const Row(
-                  children: [
-                    Text(
-                      'LEARN MORE ',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
+            ),
+            const SizedBox(height: defaultPadding / 1),
+            const Text(
+              'I am a passionate developer with experience in various technologies.\nI love creating innovative solutions and working on challenging projects.',
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: defaultPadding / 1),
+            GestureDetector(
+              onTap: () {
+                // Navigate to another page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AboutDialog()),
+                );
+              },
+              child: Row(
+                children: [
+                  const Text(
+                    'LEARN MORE ',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
                       color: Colors.white,
-                      size: 14,
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: defaultPadding / 1.5),
-              GestureDetector(
-                onTap: () {
-                  // Navigate to another page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AboutDialog()),
-                  );
-                },
-                child: Positioned(
-                  bottom: -2,
-                  left: 7,
-                  child: Container(
-                    width: 100, // Adjust the width as needed
-                    height: 6,
-                    color: Colors.white,
                   ),
+                  const Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                    size: 14,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: defaultPadding / 1.5),
+            GestureDetector(
+              onTap: () {
+                // Navigate to another page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AboutDialog()),
+                );
+              },
+              child: Positioned(
+                bottom: -2,
+                left: 7,
+                child: Container(
+                  width: 100, // Adjust the width as needed
+                  height: 6,
+                  color: Colors.white,
                 ),
               ),
-              const SizedBox(height: defaultPadding / 2),
-            ],
-          ),
+            ),
+            const SizedBox(height: defaultPadding / 2),
+          ],
+        ),
         const Spacer()
       ],
     );
