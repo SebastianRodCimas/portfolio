@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/view%20model/controller.dart';
-import 'package:flutter_portfolio/view%20model/responsive.dart';
 
 import 'navigation_button.dart';
 
@@ -23,8 +22,7 @@ class NavigationButtonList extends StatelessWidget {
                         curve: Curves.easeIn);
                   },
                   text: 'Home'),
-              if (!Responsive.isLargeMobile(context))
-                NavigationTextButton(onTap: () {}, text: 'About me'),
+              NavigationTextButton(onTap: () {}, text: 'About me'),
               NavigationTextButton(
                   onTap: () {
                     controller.animateToPage(1,
@@ -39,7 +37,7 @@ class NavigationButtonList extends StatelessWidget {
                         curve: Curves.easeIn);
                   },
                   text: 'Skills'),
-            NavigationTextButton(onTap: () {}, text: 'Experience'),
+              NavigationTextButton(onTap: () {}, text: 'Experience'),
             ],
           ),
         );

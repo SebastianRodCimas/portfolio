@@ -15,9 +15,10 @@ class Introduction extends StatelessWidget {
           ),
           if (!Responsive.isLargeMobile(context))
             SizedBox(
-              width: MediaQuery.sizeOf(context).width * 0.02,
+              width: MediaQuery.sizeOf(context).width * 0.04,
             ),
           if (!Responsive.isLargeMobile(context)) const SocialMediaIconList(),
+          if (Responsive.isLargeMobile(context)) const SocialMediaIconList(),
           SizedBox(
             width: MediaQuery.sizeOf(context).width * 0.07,
           ),

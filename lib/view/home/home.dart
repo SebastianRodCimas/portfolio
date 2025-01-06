@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
     return MainView(pages: [
       const Introduction(),
       ProjectsView(),
-      SkillsPage(),
+      const SkillsPage(),
     ]);
   }
 }

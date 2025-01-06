@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/res/constants.dart';
 
 class SkillsPage extends StatelessWidget {
+  const SkillsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             buildSectionHeader(context, 'Technical Skills'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SkillCategoryWidget(
               title: 'Programming Languages & Frameworks',
-              skills: {
+              skills: const {
                 'Python': 4.5,
                 'PHP': 4.0,
                 'JavaScript': 4.2,
@@ -23,23 +25,23 @@ class SkillsPage extends StatelessWidget {
                 'Laravel': 4.3,
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             buildSectionHeader(context, 'Project Management & Methodologies'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SkillCategoryWidget(
               title: 'Methodologies',
-              skills: {
+              skills: const {
                 'Agile': 4.7,
                 'Scrum': 4.5,
                 'Extreme Programming': 4.3,
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             buildSectionHeader(context, 'Design & Analysis'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SkillCategoryWidget(
               title: 'Design Expertise',
-              skills: {
+              skills: const {
                 'UML Diagrams': 4.6,
                 'Database Modeling': 4.5,
                 'Beta Testing Analysis': 4.4,
@@ -73,13 +75,14 @@ class SkillCategoryWidget extends StatelessWidget {
   final String title;
   final Map<String, double> skills;
 
-  SkillCategoryWidget({required this.title, required this.skills});
+  const SkillCategoryWidget(
+      {super.key, required this.title, required this.skills});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 2.0,
-      margin: EdgeInsets.symmetric(vertical: 10.0),
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
       ),
@@ -103,8 +106,8 @@ class SkillCategoryWidget extends StatelessWidget {
                     ),
               ),
             ),
-            SizedBox(height: 50),
-            Container(
+            const SizedBox(height: 50),
+            SizedBox(
               height: 200,
               child: BarChart(
                 BarChartData(
@@ -130,8 +133,8 @@ class SkillCategoryWidget extends StatelessWidget {
                         getTitlesWidget: (value, meta) {
                           return Text(
                             value.toString(),
-                            style: TextStyle(
-                                color: const Color.fromARGB(255, 3, 32, 31),
+                            style: const TextStyle(
+                                color: Color.fromARGB(255, 3, 32, 31),
                                 fontSize: 12),
                           );
                         },

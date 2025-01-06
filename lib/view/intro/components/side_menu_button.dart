@@ -24,26 +24,26 @@ class MenuButton extends StatelessWidget {
                     color: Colors.black,
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.pinkAccent.withOpacity(.5),
+                          color:
+                              Colors.pinkAccent.withAlpha((0.5 * 255).toInt()),
                           offset: const Offset(1, 1)),
                       BoxShadow(
-                          color: Colors.blue.withOpacity(.5),
+                          color: Colors.blue.withAlpha((0.5 * 255).toInt()),
                           offset: const Offset(-1, -1)),
                     ]),
-                child:  Center(
-                  child: ShaderMask(
-                    shaderCallback: (bounds) {
-                      return LinearGradient(
-                              colors: [Colors.pink, Colors.blue.shade900])
-                          .createShader(bounds);
-                    },
-                    child: Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                      size: defaultPadding * 1.2 * value,
-                    ),
-                  )
-                ),
+                child: Center(
+                    child: ShaderMask(
+                  shaderCallback: (bounds) {
+                    return LinearGradient(
+                            colors: [Colors.pink, Colors.blue.shade900])
+                        .createShader(bounds);
+                  },
+                  child: Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                    size: defaultPadding * 1.2 * value,
+                  ),
+                )),
               ),
             );
           },

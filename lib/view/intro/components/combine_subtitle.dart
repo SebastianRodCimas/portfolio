@@ -1,88 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/view/intro/components/subtitle_text.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import '../../../view model/responsive.dart';
 
 class CombineSubtitleText extends StatelessWidget {
   const CombineSubtitleText({super.key});
-  String get text => 'Computer and information systems expert ';
+
   @override
   Widget build(BuildContext context) {
+    // Taille de l'écran
+    var screenWidth = MediaQuery.of(context).size.width;
+
+    // Ajustement des tailles de texte en fonction de la largeur de l'écran
+    double startSize = screenWidth > 1080
+        ? 30
+        : screenWidth > 700
+            ? 25
+            : 20; // Plus petit pour les petits écrans
+    double endSize = screenWidth > 1080
+        ? 40
+        : screenWidth > 700
+            ? 35
+            : 25;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Responsive(
-          desktop: AnimatedSubtitleText(
-              start: 30,
-              end: 40,
-              text: 'Computer and information systems expert '),
-          largeMobile: AnimatedSubtitleText(
-              start: 30,
-              end: 25,
-              text: 'Computer and information systems expert '),
-          mobile: AnimatedSubtitleText(
-              start: 25,
-              end: 20,
-              text: 'Computer and information systems expert '),
-          tablet: AnimatedSubtitleText(
-              start: 40,
-              end: 30,
-              text: 'Computer and information systems expert '),
+        // Première ligne de texte
+        AnimatedSubtitleText(
+          start: startSize, // Taille de police ajustée
+          end: endSize, // Taille de police ajustée
+          text: 'Computer and information systems expert ',
         ),
         const SizedBox(height: 10),
-        (kIsWeb && Responsive.isLargeMobile(context)
-            ? const Responsive(
-                desktop: AnimatedSubtitleText(
-                    start: 30,
-                    end: 40,
-                    text: 'Full Stack Developer\n',
-                    gradient: true),
-                largeMobile: AnimatedSubtitleText(
-                    start: 30,
-                    end: 25,
-                    text: 'Full Stack Developer\n',
-                    gradient: true),
-                mobile: AnimatedSubtitleText(
-                    start: 25,
-                    end: 20,
-                    text: 'Full Stack Developer\n',
-                    gradient: true),
-                tablet: AnimatedSubtitleText(
-                    start: 40,
-                    end: 30,
-                    text: 'Full Stack Developer\n',
-                    gradient: true),
-              )
-            : ShaderMask(
-                shaderCallback: (bounds) {
-                  return const LinearGradient(colors: [
-                    Colors.pink,
-                    Colors.blue,
-                  ]).createShader(bounds);
-                },
-                child: const Responsive(
-                  desktop: AnimatedSubtitleText(
-                      start: 30,
-                      end: 40,
-                      text: 'Full Stack Developer\n',
-                      gradient: false),
-                  largeMobile: AnimatedSubtitleText(
-                      start: 30,
-                      end: 25,
-                      text: 'Full Stack Developer\n',
-                      gradient: false),
-                  mobile: AnimatedSubtitleText(
-                      start: 25,
-                      end: 20,
-                      text: 'Full Stack Developer\n',
-                      gradient: true),
-                  tablet: AnimatedSubtitleText(
-                      start: 40,
-                      end: 30,
-                      text: 'Full Stack Developer\n',
-                      gradient: false),
-                ),
-              ))
+
+        // Deuxième ligne de texte avec gradient appliqué
+        ShaderMask(
+          shaderCallback: (bounds) {
+            return const LinearGradient(
+              colors: [Colors.pink, Colors.blue],
+            ).createShader(bounds);
+          },
+          child: AnimatedSubtitleText(
+            start: startSize, // Taille de police ajustée
+            end: endSize, // Taille de police ajustée
+            text: 'Full Stack Developer\n',
+            gradient: false,
+          ),
+        ),
       ],
     );
   }
