@@ -15,9 +15,9 @@ class SkillsPage extends StatelessWidget {
           children: [
             buildSectionHeader(context, 'Technical Skills'),
             const SizedBox(height: 10),
-            SkillCategoryWidget(
+            const SkillCategoryWidget(
               title: 'Programming Languages & Frameworks',
-              skills: const {
+              skills: {
                 'Python': 4.5,
                 'PHP': 4.0,
                 'JavaScript': 4.2,
@@ -28,9 +28,9 @@ class SkillsPage extends StatelessWidget {
             const SizedBox(height: 20),
             buildSectionHeader(context, 'Project Management & Methodologies'),
             const SizedBox(height: 10),
-            SkillCategoryWidget(
+            const SkillCategoryWidget(
               title: 'Methodologies',
-              skills: const {
+              skills: {
                 'Agile': 4.7,
                 'Scrum': 4.5,
                 'Extreme Programming': 4.3,
@@ -39,9 +39,9 @@ class SkillsPage extends StatelessWidget {
             const SizedBox(height: 20),
             buildSectionHeader(context, 'Design & Analysis'),
             const SizedBox(height: 10),
-            SkillCategoryWidget(
+            const SkillCategoryWidget(
               title: 'Design Expertise',
-              skills: const {
+              skills: {
                 'UML Diagrams': 4.6,
                 'Database Modeling': 4.5,
                 'Beta Testing Analysis': 4.4,
