@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/view%20model/controller.dart';
+import 'package:flutter_portfolio/view/experience/exp.dart';
+import 'package:flutter_portfolio/view/intro/components/intro_body.dart';
 
 import 'navigation_button.dart';
 
@@ -17,12 +19,24 @@ class NavigationButtonList extends StatelessWidget {
             children: [
               NavigationTextButton(
                   onTap: () {
-                    controller.animateToPage(0,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeIn);
+                    // Navigation logic
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const IntroBody()),
+                    );
                   },
                   text: 'Home'),
-              NavigationTextButton(onTap: () {}, text: 'About me'),
+              NavigationTextButton(
+                  onTap: () {
+                    // Navigation logic
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AboutDialog()),
+                    );
+                  },
+                  text: 'About me'),
               NavigationTextButton(
                   onTap: () {
                     controller.animateToPage(1,
@@ -37,7 +51,15 @@ class NavigationButtonList extends StatelessWidget {
                         curve: Curves.easeIn);
                   },
                   text: 'Skills'),
-              NavigationTextButton(onTap: () {}, text: 'Experience'),
+              NavigationTextButton(
+                  onTap: () {
+                    // Navigation logic
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TimelinePage()),
+                    );
+                  },
+                  text: 'Experience'),
             ],
           ),
         );

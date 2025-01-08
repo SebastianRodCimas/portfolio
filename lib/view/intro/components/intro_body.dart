@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/view/experience/exp.dart';
 
 import '../../../res/constants.dart';
 import '../../../view model/responsive.dart';
@@ -143,8 +144,7 @@ class IntroBody extends StatelessWidget {
                   // Navigation logic
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const AboutDialog()),
+                    MaterialPageRoute(builder: (context) => TimelinePage()),
                   );
                 },
                 child: const Row(
@@ -268,7 +268,7 @@ class IntroBody extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AboutDialog()),
+              MaterialPageRoute(builder: (context) => TimelinePage()),
             );
           },
           child: const Row(
@@ -384,7 +384,7 @@ class IntroBody extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AboutDialog()),
+              MaterialPageRoute(builder: (context) => TimelinePage()),
             );
           },
           child: const Row(
@@ -501,7 +501,7 @@ class IntroBody extends StatelessWidget {
             // Navigation logic
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AboutDialog()),
+              MaterialPageRoute(builder: (context) => TimelinePage()),
             );
           },
           child: const Row(

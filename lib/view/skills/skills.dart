@@ -207,7 +207,7 @@ class SkillCategoryWidget extends StatelessWidget {
                             BarChartRodData(
                               toY: entry.value,
                               width: 16,
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [Colors.pinkAccent, Colors.blueAccent],
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
@@ -220,13 +220,13 @@ class SkillCategoryWidget extends StatelessWidget {
                       )
                       .toList(),
                   titlesData: FlTitlesData(
-                    leftTitles: AxisTitles(
+                    leftTitles: const AxisTitles(
                       sideTitles: SideTitles(showTitles: false),
                     ),
-                    rightTitles:
-                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    topTitles:
-                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    rightTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false)),
+                    topTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false)),
                     bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
                         reservedSize: 50, // Plus d'espace pour les noms
@@ -271,7 +271,7 @@ class SkillCategoryWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  gridData: FlGridData(show: true),
+                  gridData: const FlGridData(show: true),
                   borderData: FlBorderData(
                     show: true,
                     border: Border.all(color: Colors.teal.shade700, width: 0.5),
