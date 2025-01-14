@@ -1,9 +1,45 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_portfolio/res/constants.dart';
+import 'package:flutter_portfolio/view%20model/responsive.dart';
+import 'package:flutter_portfolio/view/main/components/navigation_button_list.dart';
 
-class SkillsPage extends StatelessWidget {
+class SkillsPage extends StatefulWidget {
   const SkillsPage({super.key});
+
+  @override
+  _SkillsPageState createState() => _SkillsPageState();
+}
+
+class _SkillsPageState extends State<SkillsPage>
+    with SingleTickerProviderStateMixin {
+  late ScrollController _scrollController;
+  late Ticker _ticker;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _ticker = createTicker((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.jumpTo(_scrollController.offset + 1);
+        if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent) {
+          _scrollController.jumpTo(0);
+        }
+      }
+    });
+    _ticker.start();
+  }
+
+  @override
+  void dispose() {
+    _ticker.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   double getFontSize(String text, double maxWidth) {
     // Réduire la taille de la police en fonction de la longueur du texte
     if (text.length > 10) {
@@ -13,91 +49,171 @@ class SkillsPage extends StatelessWidget {
     return 14; // Taille par défaut
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+  List<Widget> buildSkillRows(
+      BuildContext context, List<SkillCategoryWidget> skillWidgets) {
+    List<Widget> rows = [];
+    bool isMobile = Responsive.isTablet(context) ||
+        Responsive.isMobile(context) ||
+        Responsive.isLargeMobile(context);
+
+    for (int i = 0; i < skillWidgets.length; i += isMobile ? 1 : 2) {
+      rows.add(
+        Row(
           children: [
-            SizedBox(height: 10),
-            SkillCategoryWidget(
-              title: 'Programming Languages & Frameworks',
-              skills: {
-                'PHP': 2.0,
-                'TypeScript': 2.5,
-                'C#': 3.2,
-                'SQL': 3.6,
-                'CSS/XML': 3.9,
-                'Flutter': 4.6,
-              },
-            ),
-            SizedBox(height: 20),
-            SizedBox(height: 10),
-            SizedBox(height: 20),
-            SkillCategoryWidget(
-              title: 'Databases & APIs',
-              skills: {
-                'REST API': 2.5,
-                'Firebase': 2.5,
-                'UML': 3.0,
-                'SQL Server': 3.5,
-                'MySQL': 3.8,
-                'Postman': 4.2,
-              },
-            ),
-            SizedBox(height: 20),
-            SkillCategoryWidget(
-              title: 'Methodologies & Tools',
-              skills: {
-                'GitLab': 1.5,
-                'Scrum': 2.5,
-                'Git': 3.0,
-                'MPM': 4,
-                'Kanban': 4.5,
-                'Gantt': 5,
-              },
-            ),
-            SizedBox(height: 20),
-            SkillCategoryWidget(
-              title: 'Stores & Publication',
-              skills: {
-                'TestFlight': 3,
-                'App Store': 4.2,
-                'Google Play Console': 4.7,
-              },
-            ),
-            SizedBox(height: 20),
-            SkillCategoryWidget(
-              title: 'Management Tools',
-              skills: {
-                'SharePoint': 2.0,
-                'Confluence': 3.3,
-                'Jira': 4.0,
-                'BitBucket': 4.5,
-              },
-            ),
-            SizedBox(height: 20),
-            SkillCategoryWidget(
-              title: 'Project Organization',
-              skills: {
-                'Data Collection': 3.5,
-                'Technology Watch': 4.0,
-                'Task Planning': 4.7,
-              },
-            ),
-            SizedBox(height: 20),
-            SkillCategoryWidget(
-              title: 'Design Expertise',
-              skills: {
-                'UML Diagrams': 3.0,
-                'Database Modeling': 3.4,
-                'UI Design': 4,
-              },
-            ),
+            Expanded(child: skillWidgets[i]),
+            if (!isMobile && i + 1 < skillWidgets.length) ...[
+              const SizedBox(width: 20),
+              Expanded(child: skillWidgets[i + 1]),
+            ],
           ],
         ),
+      );
+      rows.add(const SizedBox(height: 20)); // Espace entre les lignes
+    }
+    return rows;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<SkillCategoryWidget> skillWidgets = const [
+      SkillCategoryWidget(
+        title: 'Programming Languages & Frameworks',
+        skills: {
+          'PHP': 2.0,
+          'TypeScript': 2.5,
+          'C#': 3.2,
+          'SQL': 3.6,
+          'CSS/XML': 3.9,
+          'Flutter': 4.6,
+        },
+      ),
+      SkillCategoryWidget(
+        title: 'Databases & APIs',
+        skills: {
+          'REST API': 2.5,
+          'Firebase': 2.5,
+          'SQL Server': 3.5,
+          'MySQL': 3.8,
+          'Postman': 4.2,
+        },
+      ),
+      SkillCategoryWidget(
+        title: 'Methodologies & Tools',
+        skills: {
+          'GitLab': 1.5,
+          'Scrum': 2.5,
+          'Git': 3.0,
+          'MPM': 4,
+          'Kanban': 4.5,
+          'Gantt': 5,
+        },
+      ),
+      SkillCategoryWidget(
+        title: 'Stores & Publication',
+        skills: {
+          'TestFlight': 3,
+          'App Store': 4.2,
+          'Google Play Console': 4.7,
+        },
+      ),
+      SkillCategoryWidget(
+        title: 'Management Tools',
+        skills: {
+          'SharePoint': 2.0,
+          'Confluence': 3.3,
+          'Jira': 4.0,
+          'BitBucket': 4.5,
+        },
+      ),
+      SkillCategoryWidget(
+        title: 'Project Organization',
+        skills: {
+          'Data Collection': 3.5,
+          'Technology Watch': 4.0,
+          'Task Planning': 4.7,
+        },
+      ),
+      SkillCategoryWidget(
+        title: 'Design Expertise',
+        skills: {
+          'UI Design': 2,
+          'UML Diagrams': 3.0,
+          'Database Modeling': 3.4,
+        },
+      ),
+    ];
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        flexibleSpace: const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Spacer(),
+              NavigationButtonList(),
+              Spacer(),
+            ],
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            buildSoftwareLogos(),
+            const SizedBox(height: 20),
+            ...buildSkillRows(context, skillWidgets),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildSoftwareLogos() {
+    List<String> softwareLogos = [
+      'assets/images/logiciel/ij.png',
+      'assets/images/logiciel/vs_code.png',
+      'assets/images/logiciel/visual_studio.png',
+      'assets/images/logiciel/sql_server.png',
+      'assets/images/logiciel/mongo_db.png',
+      'assets/images/logiciel/postman.png',
+      'assets/images/logiciel/xcode.png',
+      'assets/images/logiciel/android_studio.png',
+      'assets/images/logiciel/docker.png',
+      'assets/images/logiciel/ganttproject.png',
+      'assets/images/logiciel/whimsical.png',
+      'assets/images/logiciel/ij.png',
+      'assets/images/logiciel/power_bi.png',
+    ];
+
+    return SizedBox(
+      height: 100,
+      width: 1000,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        controller: _scrollController,
+        itemCount:
+            softwareLogos.length + 1, // Ajouter un élément supplémentaire
+        itemBuilder: (context, index) {
+          if (index == softwareLogos.length) {
+            // Ajouter un espace à la fin
+            return const SizedBox(
+                width: 100); // Ajuster la largeur selon vos besoins
+          }
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Image.asset(
+                softwareLogos[index],
+                width: 75,
+                height: 75,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

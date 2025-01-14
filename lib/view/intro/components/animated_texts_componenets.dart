@@ -79,7 +79,7 @@ class AnimatedImageContainerState extends State<AnimatedImageContainer>
                     : Responsive.isTablet(context)
                         ? MediaQuery.sizeOf(context).width * 0.14
                         : 200,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
           ),

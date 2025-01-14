@@ -137,10 +137,10 @@ class TimelinePage extends StatelessWidget {
                               stops: [0.2, 0.8],
                             ).createShader(bounds);
                           },
-                          child: Text(
+                          child: const Text(
                             "Professional Experience",
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 1.2,
@@ -174,10 +174,10 @@ class TimelinePage extends StatelessWidget {
                               stops: [0.2, 0.8],
                             ).createShader(bounds);
                           },
-                          child: Text(
+                          child: const Text(
                             "Personal Experience",
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 1.2,
