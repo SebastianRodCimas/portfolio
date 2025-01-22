@@ -5,6 +5,64 @@ import 'package:flutter_portfolio/view/main/components/navigation_bar.dart';
 import 'package:flutter_portfolio/view/main/components/navigation_button_list.dart';
 import 'package:flutter_portfolio/view%20model/responsive.dart';
 
+import 'package:flutter/material.dart';
+
+class AnimatedLine extends StatefulWidget {
+  final double maxHeight;
+  final Duration duration;
+
+  const AnimatedLine({
+    Key? key,
+    required this.maxHeight,
+    this.duration = const Duration(seconds: 2),
+  }) : super(key: key);
+
+  @override
+  State<AnimatedLine> createState() => _AnimatedLineState();
+}
+
+class _AnimatedLineState extends State<AnimatedLine>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
+
+    _animation = Tween<double>(begin: 0, end: widget.maxHeight).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+
+    // Démarrer l'animation dès que la page est affichée
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, child) {
+        return Container(
+          height: _animation.value,
+          width: 2,
+          color: Colors.teal.shade700,
+        );
+      },
+    );
+  }
+}
+
 class TimelinePage extends StatelessWidget {
   final List<TimelineEvent> events1 = [
     TimelineEvent(
@@ -233,12 +291,11 @@ class TimelinePage extends StatelessWidget {
                   ),
                 ),
                 if (index != events.length - 1)
-                  Container(
-                    height: Responsive.isMobile(context)
+                  AnimatedLine(
+                    maxHeight: Responsive.isMobile(context)
                         ? screenHeight * 0.25 // Hauteur pour mobile
                         : screenHeight * 0.12, // Hauteur pour desktop
-                    width: 2,
-                    color: Colors.teal.shade700,
+                    duration: const Duration(seconds: 4),
                   ),
                 if (index == events.length - 1)
                   Container(
