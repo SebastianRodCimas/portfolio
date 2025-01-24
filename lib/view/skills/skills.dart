@@ -1,8 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_portfolio/res/constants.dart';
+
 import 'package:flutter_portfolio/view%20model/responsive.dart';
+
 import 'package:flutter_portfolio/view/main/components/navigation_button_list.dart';
 
 class SkillsPage extends StatefulWidget {
@@ -149,22 +152,20 @@ class _SkillsPageState extends State<SkillsPage>
         automaticallyImplyLeading: false,
         elevation: 0,
         flexibleSpace: const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              Spacer(),
-              NavigationButtonList(),
-              Spacer(),
-            ],
-          ),
+          padding: EdgeInsets.all(1.0),
+          child: Column(children: [
+            Row(
+              children: [Spacer(), NavigationButtonList(), Spacer()],
+            ),
+          ]),
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            const SizedBox(height: 20), // Ajouter de l'espace avant le logo
             buildSoftwareLogos(),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40), // Ajouter de l'espace après le logo
             ...buildSkillRows(context, skillWidgets),
           ],
         ),
@@ -195,13 +196,10 @@ class _SkillsPageState extends State<SkillsPage>
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         controller: _scrollController,
-        itemCount:
-            softwareLogos.length + 1, // Ajouter un élément supplémentaire
+        itemCount: softwareLogos.length + 1,
         itemBuilder: (context, index) {
           if (index == softwareLogos.length) {
-            // Ajouter un espace à la fin
-            return const SizedBox(
-                width: 100); // Ajuster la largeur selon vos besoins
+            return const SizedBox(width: 100);
           }
           return Center(
             child: Padding(

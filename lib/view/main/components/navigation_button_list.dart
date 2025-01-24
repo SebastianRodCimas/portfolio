@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio/model/project_model.dart';
 import 'package:flutter_portfolio/view%20model/controller.dart';
 import 'package:flutter_portfolio/view/experience/exp.dart';
 import 'package:flutter_portfolio/view/home/home.dart';
+import 'package:flutter_portfolio/view/projects/project_view.dart';
 import 'package:flutter_portfolio/view/skills/skills.dart';
 
 import 'navigation_button.dart';
@@ -38,9 +40,11 @@ class NavigationButtonList extends StatelessWidget {
                   text: 'About me'),
               NavigationTextButton(
                   onTap: () {
-                    controller.animateToPage(1,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeIn);
+                    // Navigation logic
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProjectsView()),
+                    );
                   },
                   text: 'Projects'),
               NavigationTextButton(
