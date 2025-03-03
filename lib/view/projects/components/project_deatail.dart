@@ -3,7 +3,6 @@ import 'package:flutter_portfolio/view/projects/components/project_link.dart';
 
 import '../../../model/project_model.dart';
 import '../../../res/constants.dart';
-import '../../../view model/responsive.dart';
 
 class ProjectDetail extends StatefulWidget {
   final int index;
@@ -23,15 +22,15 @@ class _ProjectDetailState extends State<ProjectDetail>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 5), // Adjust the duration as needed
+      duration: const Duration(seconds: 4), // Adjust the duration as needed
       vsync: this,
     )..repeat(reverse: true); // Continuous animation
 
     int logoCount = projectList[widget.index].languages.length;
     double startOffset =
-        0.2 + (logoCount * 0.05); // Adjust start offset based on logo count
+        0.1 + (logoCount * 0.05); // Adjust start offset based on logo count
     double endOffset =
-        -0.2 - (logoCount * 0.05); // Adjust end offset based on logo count
+        0 - (logoCount * 0.05); // Adjust end offset based on logo count
 
     _animation = Tween<Offset>(
       begin: Offset(startOffset, 0.0), // Start from the far right
@@ -82,13 +81,13 @@ class _ProjectDetailState extends State<ProjectDetail>
             ),
           ),
         ),
-        (isMobile(context) || isLargeMobile(context) || isTablet(context))
-            ? const SizedBox(height: defaultPadding / 2)
-            : const SizedBox(height: defaultPadding),
+        if (isMobile(context) || isDesktop(context))
+          const SizedBox(height: defaultPadding),
 
         // Project Description
         Text(projectList[widget.index].description,
-            style: const TextStyle(color: Colors.white, height: 1.5),
+            style:
+                const TextStyle(color: Colors.white, height: 1.5, fontSize: 12),
             maxLines: size.width > 700 && size.width < 750
                 ? 3
                 : size.width < 470
@@ -99,18 +98,18 @@ class _ProjectDetailState extends State<ProjectDetail>
                             ? 6
                             : 4,
             overflow: TextOverflow.ellipsis),
-        const SizedBox(height: defaultPadding / 10),
+        const SizedBox(height: defaultPadding / 5),
 
         // Project Logo
         Center(
           child: Image.asset(
             projectList[widget.index].image,
-            width: 38, // Adjust logo size as needed
-            height: 38,
+            width: 80, // Adjust logo size as needed
+            height: 80,
           ),
         ),
-        const SizedBox(height: defaultPadding / 4),
-
+        if (isMobile(context) || isDesktop(context))
+          const SizedBox(height: defaultPadding),
         // Programming Language Icons with Continuous Animation
         SizedBox(
           height: 30,
@@ -137,7 +136,7 @@ class _ProjectDetailState extends State<ProjectDetail>
             },
           ),
         ),
-
+        const SizedBox(height: defaultPadding),
         // Project Links
         ProjectLinks(
           project: projectList[widget.index],

@@ -21,7 +21,7 @@ class ProjectsView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Espace supérieur pour le Web ou Mobile
-          SizedBox(
+          const SizedBox(
             height: kIsWeb ? defaultPadding * 2 : defaultPadding / 2,
           ),
           const Row(

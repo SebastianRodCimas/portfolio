@@ -5,7 +5,6 @@ import 'package:flutter_portfolio/view/main/components/navigation_bar.dart';
 import 'package:flutter_portfolio/view/main/components/navigation_button_list.dart';
 import 'package:flutter_portfolio/view%20model/responsive.dart';
 
-import 'package:flutter/material.dart';
 
 class AnimatedLine extends StatefulWidget {
   final double maxHeight;

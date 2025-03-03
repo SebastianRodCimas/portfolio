@@ -28,7 +28,7 @@ class ProjectLinks extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             if (project.link != null && project.link!.isNotEmpty)
               IconButton(
@@ -42,7 +42,6 @@ class ProjectLinks extends StatelessWidget {
                   color: Colors.amber,
                 ),
               ),
-            Spacer(),
             TextButton.icon(
               onPressed: () {
                 // Navigate to a new page to show screenshots
@@ -70,8 +69,9 @@ class ProjectLinks extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: defaultPadding / 2),
+        const SizedBox(height: defaultPadding),
         Text(
+          maxLines: 2,
           project.projectType,
           style: const TextStyle(
             color: Colors.white,
@@ -84,165 +84,156 @@ class ProjectLinks extends StatelessWidget {
   }
 
   Widget _buildTabletLayout(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        if (project.link != null && project.link!.isNotEmpty)
-          IconButton(
-            color: Colors.amber,
-            onPressed: () {
-              launchUrl(Uri.parse(project.link!));
-            },
-            icon: SvgPicture.asset(
-              'assets/icons/github.svg',
-              height: 20,
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (project.link != null && project.link!.isNotEmpty)
+            IconButton(
               color: Colors.amber,
-            ),
-          ),
-        Text(
-          project.projectType,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            color: Colors.amber,
-            fontWeight: FontWeight.bold,
-            fontSize: 11,
-          ),
-        ),
-        TextButton.icon(
-          onPressed: () {
-            // Navigate to a new page to show screenshots
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    ScreenshotPage(screenshots: project.screenshots),
+              onPressed: () {
+                launchUrl(Uri.parse(project.link!));
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/github.svg',
+                height: 20,
+                color: Colors.amber,
               ),
-            );
-          },
-          icon: const Icon(
-            Icons.image,
-            color: Colors.amber,
-          ),
-          label: const Text(
-            'Screenshots',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+            ),
+          TextButton.icon(
+            onPressed: () {
+              // Navigate to a new page to show screenshots
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ScreenshotPage(screenshots: project.screenshots),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.image,
               color: Colors.amber,
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
+            ),
+            label: const Text(
+              'Screenshots',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.amber,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
             ),
           ),
-        ),
-      ],
-    );
+        ],
+      ),
+    ]);
   }
 
   Widget _buildMobileLayout(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        if (project.link != null && project.link!.isNotEmpty)
-          IconButton(
-            color: Colors.amber,
-            onPressed: () {
-              launchUrl(Uri.parse(project.link!));
-            },
-            icon: SvgPicture.asset(
-              'assets/icons/github.svg',
-              height: 20,
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          if (project.link != null && project.link!.isNotEmpty)
+            IconButton(
               color: Colors.amber,
-            ),
-          ),
-        Text(
-          project.projectType,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            color: Colors.amber,
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-          ),
-        ),
-        TextButton.icon(
-          onPressed: () {
-            // Navigate to a new page to show screenshots
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    ScreenshotPage(screenshots: project.screenshots),
+              onPressed: () {
+                launchUrl(Uri.parse(project.link!));
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/github.svg',
+                height: 20,
+                color: Colors.amber,
               ),
-            );
-          },
-          icon: const Icon(
-            Icons.image,
-            color: Colors.amber,
-          ),
-          label: const Text(
-            'Screenshots',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+            ),
+          TextButton.icon(
+            onPressed: () {
+              // Navigate to a new page to show screenshots
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ScreenshotPage(screenshots: project.screenshots),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.image,
               color: Colors.amber,
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
+            ),
+            label: const Text(
+              'Screenshots',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.amber,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
             ),
           ),
+        ],
+      ),
+      const SizedBox(height: defaultPadding),
+      Text(
+        maxLines: 2,
+        project.projectType,
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 10,
         ),
-      ],
-    );
+      ),
+    ]);
   }
 
   Widget _buildLargeMobileLayout(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        if (project.link != null && project.link!.isNotEmpty)
-          IconButton(
-            color: Colors.amber,
-            onPressed: () {
-              launchUrl(Uri.parse(project.link!));
-            },
-            icon: SvgPicture.asset(
-              'assets/icons/github.svg',
-              height: 20,
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (project.link != null && project.link!.isNotEmpty)
+            IconButton(
               color: Colors.amber,
-            ),
-          ),
-        Text(
-          project.projectType,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            color: Colors.amber,
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-          ),
-        ),
-        TextButton.icon(
-          onPressed: () {
-            // Navigate to a new page to show screenshots
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    ScreenshotPage(screenshots: project.screenshots),
+              onPressed: () {
+                launchUrl(Uri.parse(project.link!));
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/github.svg',
+                height: 20,
+                color: Colors.amber,
               ),
-            );
-          },
-          icon: const Icon(
-            Icons.image,
-            color: Colors.amber,
-          ),
-          label: const Text(
-            'Screenshots',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+            ),
+          TextButton.icon(
+            onPressed: () {
+              // Navigate to a new page to show screenshots
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ScreenshotPage(screenshots: project.screenshots),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.image,
               color: Colors.amber,
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
+            ),
+            label: const Text(
+              'Screenshots',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.amber,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
             ),
           ),
-        ),
-      ],
-    );
+        ],
+      ),
+    ]);
   }
 }
 
