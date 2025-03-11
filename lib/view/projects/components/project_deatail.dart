@@ -17,6 +17,35 @@ class _ProjectDetailState extends State<ProjectDetail>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _animation;
+  // Programming Language Icons with Continuous Animation
+  // Définir des tailles spécifiques pour chaque projet
+  Map<String, double> logoSizes = {
+    'SCALIA Mobile': 45,
+    'TekNow': 35,
+    'Election Prediction AI': 45, // Projet avec des icônes plus grandes
+    'Connected socket - ADEE': 50,
+    'Logiciel ALX Technology': 40,
+    'Customer File Management': 40,
+    'Espana Cultura': 40,
+    'Agile IT Project Management': 40,
+  };
+
+// Taille par défaut si un projet n'est pas dans la liste
+  double defaultSize = 40;
+
+  Map<String, double> projectLogoSizes = {
+    'SCALIA Mobile': 70,
+    'TekNow': 55,
+    'Election Prediction AI': 80, // Projet avec un logo plus grand
+    'Connected socket - ADEE': 80,
+    'Logiciel ALX Technology': 70,
+    'Customer File Management': 75,
+    'Espana Cultura': 75,
+    'Agile IT Project Management': 60,
+  };
+
+// Taille par défaut si un projet n'est pas dans la liste
+  double defaultProjectLogoSize = 70;
 
   @override
   void initState() {
@@ -54,6 +83,30 @@ class _ProjectDetailState extends State<ProjectDetail>
       MediaQuery.of(context).size.width < 1200;
   bool isDesktop(BuildContext context) =>
       MediaQuery.of(context).size.width >= 1200;
+
+  // Ajuster les tailles en fonction du type d'écran
+  double getProjectLogoSize() {
+    double baseSize = projectLogoSizes[projectList[widget.index].name] ??
+        defaultProjectLogoSize;
+
+    if (isMobile(context)) {
+      return baseSize * 0.8; // Réduire la taille des logos pour mobile
+    } else if (isTablet(context)) {
+      return baseSize * 0.9; // Taille légèrement réduite pour les tablettes
+    }
+    return baseSize; // Taille normale pour Desktop
+  }
+
+  double getLanguageLogoSize() {
+    double baseSize = logoSizes[projectList[widget.index].name] ?? defaultSize;
+
+    if (isMobile(context)) {
+      return baseSize * 0.75; // Réduction pour mobile
+    } else if (isTablet(context)) {
+      return baseSize * 0.85; // Taille ajustée pour tablette
+    }
+    return baseSize; // Taille normale pour Desktop
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,16 +157,16 @@ class _ProjectDetailState extends State<ProjectDetail>
         Center(
           child: Image.asset(
             projectList[widget.index].image,
-            width: 80, // Adjust logo size as needed
-            height: 80,
+            width: getProjectLogoSize(),
+            height: getProjectLogoSize(),
           ),
         ),
+
         if (isMobile(context) || isDesktop(context))
-          const SizedBox(height: defaultPadding),
-        // Programming Language Icons with Continuous Animation
+          const SizedBox(height: defaultPadding / 10),
+
         SizedBox(
-          height: 30,
-          // Adjust height as needed
+          height: 80, // Adapter la hauteur pour éviter les coupures
           child: AnimatedBuilder(
             animation: _animation,
             builder: (context, child) {
@@ -123,11 +176,14 @@ class _ProjectDetailState extends State<ProjectDetail>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: projectList[widget.index].languages.map((logo) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Image.asset(
-                        logo,
-                        width: 35,
-                        height: 35,
+                      padding: const EdgeInsets.symmetric(horizontal: 7.0),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Image.asset(
+                          logo,
+                          width: getLanguageLogoSize(),
+                          height: getLanguageLogoSize(),
+                        ),
                       ),
                     );
                   }).toList(),
@@ -136,6 +192,7 @@ class _ProjectDetailState extends State<ProjectDetail>
             },
           ),
         ),
+
         const SizedBox(height: defaultPadding),
         // Project Links
         ProjectLinks(

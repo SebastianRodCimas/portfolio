@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 import '../../../view model/responsive.dart';
@@ -33,12 +32,12 @@ class TitleText extends StatelessWidget {
               shadows: [
                 BoxShadow(
                   color: Colors.pink.withOpacity(0.1),
-                  offset: Offset(-2, 2),
+                  offset: const Offset(-2, 2),
                   blurRadius: 0,
                 ),
                 BoxShadow(
                   color: Colors.blue.withOpacity(0.1),
-                  offset: Offset(2, -2),
+                  offset: const Offset(2, -2),
                   blurRadius: 0,
                 ),
               ],
@@ -69,12 +68,12 @@ class TitleText extends StatelessWidget {
               shadows: [
                 BoxShadow(
                   color: Colors.pink.withOpacity(0.1),
-                  offset: Offset(-2, 2),
+                  offset: const Offset(-2, 2),
                   blurRadius: 10,
                 ),
                 BoxShadow(
                   color: Colors.cyanAccent.withOpacity(0.1),
-                  offset: Offset(2, -2),
+                  offset: const Offset(2, -2),
                   blurRadius: 10,
                 ),
               ],
