@@ -26,8 +26,8 @@ class _ProjectDetailState extends State<ProjectDetail>
     'Connected socket - ADEE': 50,
     'Logiciel ALX Technology': 40,
     'Customer File Management': 40,
-    'Espana Cultura': 40,
-    'Agile IT Project Management': 60,
+    'Espana Cultura': 50,
+    'Agile IT Project Management': 55,
   };
 
 // Taille par défaut si un projet n'est pas dans la liste
@@ -35,13 +35,13 @@ class _ProjectDetailState extends State<ProjectDetail>
 
   Map<String, double> projectLogoSizes = {
     'SCALIA Mobile': 70,
-    'TekNow': 55,
-    'Election Prediction AI': 80, // Projet avec un logo plus grand
-    'Connected socket - ADEE': 80,
-    'Logiciel ALX Technology': 70,
+    'TekNow': 104,
+    'Election Prediction AI': 100, // Projet avec un logo plus grand
+    'Connected socket - ADEE': 90,
+    'Logiciel ALX Technology': 90,
     'Customer File Management': 90,
-    'Espana Cultura': 75,
-    'Agile IT Project Management': 50,
+    'Espana Cultura': 80,
+    'Agile IT Project Management': 65,
   };
 
 // Taille par défaut si un projet n'est pas dans la liste
@@ -151,7 +151,7 @@ class _ProjectDetailState extends State<ProjectDetail>
                             ? 6
                             : 4,
             overflow: TextOverflow.ellipsis),
-        const SizedBox(height: defaultPadding / 5),
+        const SizedBox(height: defaultPadding / 10),
 
         // Project Logo
         Center(

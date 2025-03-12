@@ -34,7 +34,7 @@ List<Project> projectList = [
   Project(
     'TekNow',
     'Document the history and evolution of electronic music genres while highlighting festivals. Offer a reward system where users can earn discounts on events.',
-    'assets/icons/Tecknow.jpg',
+    'assets/icons/Tecknow.png',
     'https://github.com/SebastianRodCimas/TekNow',
     [
       'assets/icons/flutter.png',

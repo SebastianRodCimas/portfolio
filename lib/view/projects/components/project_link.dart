@@ -39,7 +39,7 @@ class ProjectLinks extends StatelessWidget {
                 },
                 icon: SvgPicture.asset(
                   'assets/icons/github.svg',
-                  height: 30,
+                  height: 25,
                   color: Colors.amber,
                 ),
               ),
@@ -70,7 +70,7 @@ class ProjectLinks extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: defaultPadding),
+        const SizedBox(height: defaultPadding / 5),
         Text(
           maxLines: 2,
           project.projectType,
@@ -177,7 +177,7 @@ class ProjectLinks extends StatelessWidget {
           ),
         ],
       ),
-      const SizedBox(height: defaultPadding),
+      const SizedBox(height: defaultPadding / 5),
       Text(
         maxLines: 2,
         project.projectType,
@@ -231,6 +231,16 @@ class ProjectLinks extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: 12,
               ),
+            ),
+          ),
+          const SizedBox(height: defaultPadding / 5),
+          Text(
+            maxLines: 2,
+            project.projectType,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 10,
             ),
           ),
         ],
