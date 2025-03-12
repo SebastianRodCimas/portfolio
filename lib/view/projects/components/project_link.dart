@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/res/constants.dart';
 import 'package:flutter_svg/svg.dart';
@@ -49,7 +50,7 @@ class ProjectLinks extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        ScreenshotPage(screenshots: project.screenshots),
+                        ScreenshotPage(screenshots: project.screenshots ?? []),
                   ),
                 );
               },
@@ -101,31 +102,32 @@ class ProjectLinks extends StatelessWidget {
                 color: Colors.amber,
               ),
             ),
-          TextButton.icon(
-            onPressed: () {
-              // Navigate to a new page to show screenshots
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ScreenshotPage(screenshots: project.screenshots),
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.image,
-              color: Colors.amber,
-            ),
-            label: const Text(
-              'Screenshots',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+          if (project.screenshots != null && project.screenshots!.isNotEmpty)
+            TextButton.icon(
+              onPressed: () {
+                // Navigate to a new page to show screenshots
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ScreenshotPage(screenshots: project.screenshots ?? []),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.image,
                 color: Colors.amber,
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
+              ),
+              label: const Text(
+                'Screenshots',
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: Colors.amber,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
               ),
             ),
-          ),
         ],
       ),
     ]);
@@ -155,7 +157,7 @@ class ProjectLinks extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      ScreenshotPage(screenshots: project.screenshots),
+                      ScreenshotPage(screenshots: project.screenshots ?? []),
                 ),
               );
             },
@@ -213,7 +215,7 @@ class ProjectLinks extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      ScreenshotPage(screenshots: project.screenshots),
+                      ScreenshotPage(screenshots: project.screenshots ?? []),
                 ),
               );
             },
@@ -237,24 +239,81 @@ class ProjectLinks extends StatelessWidget {
   }
 }
 
-class ScreenshotPage extends StatelessWidget {
+class ScreenshotPage extends StatefulWidget {
   final List<String> screenshots;
   const ScreenshotPage({super.key, required this.screenshots});
 
   @override
+  State<ScreenshotPage> createState() => _ScreenshotPageState();
+}
+
+class _ScreenshotPageState extends State<ScreenshotPage> {
+  int _currentIndex = 0; // Indice de l'image affichée
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Screenshots'),
-      ),
-      body: ListView.builder(
-        itemCount: screenshots.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(screenshots[index]),
-          );
-        },
+      backgroundColor: bgColor,
+      body: Stack(
+        children: [
+          // Carrousel d'images en plein écran
+          Center(
+            child: CarouselSlider(
+              options: CarouselOptions(
+                height: MediaQuery.of(context).size.height * 0.8,
+                enlargeCenterPage: true,
+                autoPlay: false,
+                viewportFraction: 1.0,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+              ),
+              items: widget.screenshots.map((screenshot) {
+                return Center(
+                  child: Image.asset(
+                    screenshot,
+                    fit: BoxFit.contain,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+
+          // Bouton retour en haut à gauche (superposé)
+          Positioned(
+            top: 40,
+            left: 10,
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.white, size: 30),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
+
+          // Indicateur de position (petits points sous le carrousel)
+          Positioned(
+            bottom: 30,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: widget.screenshots.asMap().entries.map((entry) {
+                return Container(
+                  width: 10.0,
+                  height: 10.0,
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color:
+                        _currentIndex == entry.key ? Colors.white : Colors.grey,
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }

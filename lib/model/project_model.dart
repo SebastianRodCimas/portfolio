@@ -4,7 +4,7 @@ class Project {
   final String image; // Logo for each project
   final String? link;
   final List<String> languages; // List of programming language icons
-  final List<String> screenshots; // List of screenshot paths
+  final List<String>? screenshots; // List of screenshot paths
   final String projectType; // Type of project (professional, school, personal)
   Project(this.name, this.description, this.image, this.link, this.languages,
       this.screenshots, this.projectType);
@@ -15,34 +15,34 @@ List<Project> projectList = [
     'SCALIA Mobile',
     'Creation of a mobile application to visualize surveillance cameras with user preferences, from design to hosting.',
     'assets/icons/scalialogo.png',
-    'https://github.com/Hamad-Anwar/Coffe-Shop-Beautifull-UI',
+    null,
     [
       'assets/icons/flutter.png',
       'assets/icons/dart.png',
-      'assets/icons/apirest.png',
-      'assets/icons/firebase.png'
+      'assets/icons/api.png',
+      'assets/icons/react_native.png'
     ],
     [
-      'assets/icons/flutter.png',
-      'assets/icons/dart.png',
-      'assets/icons/firebase.png'
+      'assets/images/screenshot/authentificator.jpg',
+      'assets/images/screenshot/testperf.png',
+      'assets/images/screenshot/scalia-pageprincipal.jpg',
+      'assets/images/screenshot/scalia-pageprincipal2.jpg',
+      'assets/images/screenshot/parametrages.jpg'
     ],
     'Professional - 3rd year of work-study - 2023/2024',
   ),
   Project(
     'TekNow',
     'Document the history and evolution of electronic music genres while highlighting festivals. Offer a reward system where users can earn discounts on events.',
-    'assets/images/car.png',
-    'https://github.com/Hamad-Anwar/Coffe-Shop-Beautifull-UI',
+    'assets/icons/Tecknow.jpg',
+    'https://github.com/SebastianRodCimas/TekNow',
     [
       'assets/icons/flutter.png',
       'assets/icons/dart.png',
       'assets/icons/firebase.png'
     ],
     [
-      'assets/icons/flutter.png',
-      'assets/icons/dart.png',
-      'assets/icons/firebase.png'
+      'assets/images/screenshot/dgclass.png',
     ],
     'Personnal - Current project - 2025',
   ),
@@ -50,16 +50,16 @@ List<Project> projectList = [
     'Election Prediction AI',
     'Development of a Proof of Concept (POC) for Predicting Electoral Trends using AI.',
     'assets/images/data.png',
-    null,
+    'https://github.com/SebastianRodCimas/ia-elections',
     [
       'assets/icons/pandas.png',
       'assets/images/logiciel/power_bi.png',
       'assets/icons/scikit-learn.png'
     ],
     [
-      'assets/icons/flutter.png',
-      'assets/icons/dart.png',
-      'assets/icons/firebase.png'
+      'assets/images/screenshot/diagr-ia.png',
+      'assets/images/screenshot/rsquare.png',
+      'assets/images/screenshot/data.png'
     ],
     'School - 1st year master - 2022',
   ),
@@ -74,9 +74,9 @@ List<Project> projectList = [
       'assets/icons/css.png'
     ],
     [
-      'assets/icons/flutter.png',
-      'assets/icons/dart.png',
-      'assets/icons/firebase.png'
+      'assets/images/screenshot/phone.png',
+      'assets/images/screenshot/cable.png',
+      'assets/images/screenshot/bouton.png'
     ],
     'School - Concourt National Worshop won - 2020',
   ),
@@ -86,7 +86,7 @@ List<Project> projectList = [
     'assets/images/alx.jpg',
     null,
     ['assets/icons/vba.jpg', 'assets/icons/net.png', 'assets/icons/Blazor.png'],
-    ['assets/icons/vba.jpg', 'assets/icons/net.png', 'assets/icons/Blazor.png'],
+    null,
     'Professional - 2nd year of work-study - 2022/2023',
   ),
   Project(
@@ -101,9 +101,9 @@ List<Project> projectList = [
       'assets/icons/apps.png'
     ],
     [
-      'assets/icons/flutter.png',
-      'assets/icons/dart.png',
-      'assets/icons/firebase.png'
+      'assets/images/screenshot/gantsyrius.png',
+      'assets/images/screenshot/contrat-syrius.png',
+      'assets/images/screenshot/devis.png'
     ],
     'Professional - 1nd year of work-study - 2021/2022',
   ),
@@ -111,12 +111,12 @@ List<Project> projectList = [
     'Espana Cultura',
     'Windows Forms desktop application in C# designed to manage data on courses, teachers, students, classes, timetables and carpools, optimizing school organization.',
     'assets/icons/espana.png',
-    'https://github.com/Hamad-Anwar/Task-Sync-Pro-Flutter',
-    ['assets/icons/c.png', 'assets/icons/csharp.jpg', 'assets/icons/xml.png'],
+    'https://github.com/SebastianRodCimas/EspanaCultura',
+    ['assets/icons/c.png', 'assets/icons/csharp.png', 'assets/icons/sql.png'],
     [
-      'assets/icons/flutter.png',
-      'assets/icons/dart.png',
-      'assets/icons/firebase.png'
+      'assets/images/screenshot/mcdespana.png',
+      'assets/images/screenshot/espana.png',
+      'assets/images/screenshot/sqlespana.png'
     ],
     'Personal - 1nd year of bachelor degree - 2021',
   ),
@@ -124,16 +124,16 @@ List<Project> projectList = [
     'Agile IT Project Management',
     'Modernize Information System with a modular architecture to optimize stocks, automation, and customer relations.',
     'assets/images/mains.png',
-    '',
+    null,
     [
-      'assets/icons/flutter.svg',
-      'assets/icons/dart.svg',
-      'assets/icons/firebase.svg'
+      'assets/icons/kanban.png',
+      'assets/images/logiciel/ganttproject.png',
+      'assets/icons/risque.png'
     ],
     [
-      'assets/icons/flutter.png',
-      'assets/icons/dart.png',
-      'assets/icons/firebase.png'
+      'assets/images/screenshot/strategie.png',
+      'assets/images/screenshot/gantt.png',
+      'assets/images/screenshot/risque.png'
     ],
     'School - 2nd year master - 2024',
   ),

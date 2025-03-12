@@ -20,14 +20,14 @@ class _ProjectDetailState extends State<ProjectDetail>
   // Programming Language Icons with Continuous Animation
   // Définir des tailles spécifiques pour chaque projet
   Map<String, double> logoSizes = {
-    'SCALIA Mobile': 45,
+    'SCALIA Mobile': 40,
     'TekNow': 35,
     'Election Prediction AI': 45, // Projet avec des icônes plus grandes
     'Connected socket - ADEE': 50,
     'Logiciel ALX Technology': 40,
     'Customer File Management': 40,
     'Espana Cultura': 40,
-    'Agile IT Project Management': 40,
+    'Agile IT Project Management': 60,
   };
 
 // Taille par défaut si un projet n'est pas dans la liste
@@ -39,9 +39,9 @@ class _ProjectDetailState extends State<ProjectDetail>
     'Election Prediction AI': 80, // Projet avec un logo plus grand
     'Connected socket - ADEE': 80,
     'Logiciel ALX Technology': 70,
-    'Customer File Management': 75,
+    'Customer File Management': 90,
     'Espana Cultura': 75,
-    'Agile IT Project Management': 60,
+    'Agile IT Project Management': 50,
   };
 
 // Taille par défaut si un projet n'est pas dans la liste
