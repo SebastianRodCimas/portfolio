@@ -31,12 +31,12 @@ class TitleText extends StatelessWidget {
               color: Colors.white, // This color will be masked by the shader
               shadows: [
                 BoxShadow(
-                  color: Colors.pink.withOpacity(0.1),
+                  color: Colors.pink.withAlpha(25), // 0.1 * 255 = 25.5
                   offset: const Offset(-2, 2),
                   blurRadius: 0,
                 ),
                 BoxShadow(
-                  color: Colors.blue.withOpacity(0.1),
+                  color: Colors.blue.withAlpha(25), // 0.1 * 255 = 25.5
                   offset: const Offset(2, -2),
                   blurRadius: 0,
                 ),
@@ -67,12 +67,12 @@ class TitleText extends StatelessWidget {
               fontWeight: FontWeight.bold,
               shadows: [
                 BoxShadow(
-                  color: Colors.pink.withOpacity(0.1),
+                  color: Colors.pink.withAlpha(25), // 0.1 * 255 = 25.5
                   offset: const Offset(-2, 2),
                   blurRadius: 10,
                 ),
                 BoxShadow(
-                  color: Colors.cyanAccent.withOpacity(0.1),
+                  color: Colors.cyanAccent.withAlpha(25), // 0.1 * 255 = 25.5
                   offset: const Offset(2, -2),
                   blurRadius: 10,
                 ),

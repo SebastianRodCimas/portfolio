@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/view/experience/exp.dart';
+import 'package:flutter_portfolio/view/skills/skills.dart';
 
 import '../../../res/constants.dart';
 import '../../../view model/responsive.dart';
@@ -76,16 +77,17 @@ class IntroBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'ABOUT ME',
+                'Experience',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: defaultPadding),
+              const SizedBox(height: defaultPadding / 2),
               const Text(
-                'I am a passionate developer with experience in various technologies.\nI love creating innovative solutions and working on challenging projects.',
+                'My years of experience have enabled me to work autonomously while making key decisions\n'
+                'to successfully execute each project undertaken during my work-study program',
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -97,11 +99,11 @@ class IntroBody extends StatelessWidget {
                   // Navigation logic
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const AboutDialog()),
+                    MaterialPageRoute(builder: (context) => TimelinePage()),
                   );
                 },
                 child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'LEARN MORE ',
@@ -123,16 +125,16 @@ class IntroBody extends StatelessWidget {
               const AnimatedImageContainer(),
               const SizedBox(height: defaultPadding),
               const Text(
-                'EXPERIENCE',
+                'SKILLS',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: defaultPadding),
+              const SizedBox(height: defaultPadding / 2),
               const Text(
-                'I am a passionate developer with experience in various technologies.\nI love creating innovative solutions and working on challenging projects.',
+                'Over the past few years, I have acquired numerous skills in various fields by developing optimal IT solutions\n',
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -144,7 +146,7 @@ class IntroBody extends StatelessWidget {
                   // Navigation logic
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TimelinePage()),
+                    MaterialPageRoute(builder: (context) => const SkillsPage()),
                   );
                 },
                 child: const Row(
@@ -197,7 +199,7 @@ class IntroBody extends StatelessWidget {
         // Texte d'introduction
         const SizedBox(height: defaultPadding),
         const Text(
-          'ABOUT ME', // Section ABOUT ME
+          'Experience',
           style: TextStyle(
             fontSize: 16,
             color: Colors.white,
@@ -206,8 +208,8 @@ class IntroBody extends StatelessWidget {
         ),
         const SizedBox(height: defaultPadding / 2),
         const Text(
-          'I am a passionate developer with experience in various technologies.\n'
-          'I love creating innovative solutions and working on challenging projects.',
+          'My years of experience have enabled me to work autonomously while making key decisions\n'
+          'to successfully execute each project undertaken during my work-study program',
           style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -219,7 +221,7 @@ class IntroBody extends StatelessWidget {
             // Navigation logic
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AboutDialog()),
+              MaterialPageRoute(builder: (context) => TimelinePage()),
             );
           },
           child: const Row(
@@ -246,7 +248,7 @@ class IntroBody extends StatelessWidget {
 
         const SizedBox(height: defaultPadding),
         const Text(
-          'EXPERIENCE', // Section ABOUT ME
+          'SKILLS',
           style: TextStyle(
             fontSize: 16,
             color: Colors.white,
@@ -255,8 +257,7 @@ class IntroBody extends StatelessWidget {
         ),
         const SizedBox(height: defaultPadding / 2),
         const Text(
-          'I am a passionate developer with experience in various technologies.\n'
-          'I love creating innovative solutions and working on challenging projects.',
+          'Over the past few years, I have acquired numerous skills in various fields by developing optimal IT solutions\n',
           style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -268,7 +269,7 @@ class IntroBody extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TimelinePage()),
+              MaterialPageRoute(builder: (context) => const SkillsPage()),
             );
           },
           child: const Row(
@@ -322,8 +323,17 @@ class IntroBody extends StatelessWidget {
         ),
         const SizedBox(height: defaultPadding / 2),
         const Text(
-          'I am a passionate developer with experience in various technologies.\n'
-          'I love creating innovative solutions and working on challenging projects.',
+          'Experience',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: defaultPadding / 2),
+        const Text(
+          'My years of experience have enabled me to work autonomously while making key decisions\n'
+          'to successfully execute each project undertaken during my work-study program',
           style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -335,7 +345,7 @@ class IntroBody extends StatelessWidget {
             // Navigation logic
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AboutDialog()),
+              MaterialPageRoute(builder: (context) => TimelinePage()),
             );
           },
           child: const Row(
@@ -357,13 +367,12 @@ class IntroBody extends StatelessWidget {
             ],
           ),
         ),
-
         const SizedBox(height: defaultPadding),
         const AnimatedImageContainer(),
-        const SizedBox(height: defaultPadding),
+
         const SizedBox(height: defaultPadding),
         const Text(
-          'EXPERIENCE', // Section ABOUT ME
+          'SKILLS',
           style: TextStyle(
             fontSize: 16,
             color: Colors.white,
@@ -372,8 +381,7 @@ class IntroBody extends StatelessWidget {
         ),
         const SizedBox(height: defaultPadding / 2),
         const Text(
-          'I am a passionate developer with experience in various technologies.\n'
-          'I love creating innovative solutions and working on challenging projects.',
+          'Over the past few years, I have acquired numerous skills in various fields by developing optimal IT solutions\n',
           style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -384,7 +392,7 @@ class IntroBody extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TimelinePage()),
+              MaterialPageRoute(builder: (context) => const SkillsPage()),
             );
           },
           child: const Row(
@@ -429,7 +437,7 @@ class IntroBody extends StatelessWidget {
             start: 12, end: 14), // Texte d'introduction
         const SizedBox(height: defaultPadding),
         const Text(
-          'ABOUT ME', // Section ABOUT ME
+          'Experience',
           style: TextStyle(
             fontSize: 16,
             color: Colors.white,
@@ -438,8 +446,8 @@ class IntroBody extends StatelessWidget {
         ),
         const SizedBox(height: defaultPadding / 2),
         const Text(
-          'I am a passionate developer with experience in various technologies.\n'
-          'I love creating innovative solutions and working on challenging projects.',
+          'My years of experience have enabled me to work autonomously while making key decisions\n'
+          'to successfully execute each project undertaken during my work-study program',
           style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -451,7 +459,7 @@ class IntroBody extends StatelessWidget {
             // Navigation logic
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AboutDialog()),
+              MaterialPageRoute(builder: (context) => TimelinePage()),
             );
           },
           child: const Row(
@@ -473,27 +481,25 @@ class IntroBody extends StatelessWidget {
             ],
           ),
         ),
-
         const SizedBox(height: defaultPadding),
         const AnimatedImageContainer(),
+
         const SizedBox(height: defaultPadding),
         const Text(
-          'EXPERIENCE', // Section EXPERIENCE
+          'SKILLS',
           style: TextStyle(
             fontSize: 16,
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: defaultPadding),
+        const SizedBox(height: defaultPadding / 2),
         const Text(
-          'I am a passionate developer with experience in various technologies.\n'
-          'I love creating innovative solutions and working on challenging projects.',
+          'Over the past few years, I have acquired numerous skills in various fields by developing optimal IT solutions\n',
           style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: Colors.pinkAccent,
-          ),
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.pinkAccent),
         ),
         const SizedBox(height: defaultPadding),
         GestureDetector(
@@ -501,7 +507,7 @@ class IntroBody extends StatelessWidget {
             // Navigation logic
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TimelinePage()),
+              MaterialPageRoute(builder: (context) => const SkillsPage()),
             );
           },
           child: const Row(

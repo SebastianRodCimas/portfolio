@@ -40,7 +40,8 @@ class ProjectLinks extends StatelessWidget {
                 icon: SvgPicture.asset(
                   'assets/icons/github.svg',
                   height: 25,
-                  color: Colors.amber,
+                  colorFilter:
+                      const ColorFilter.mode(Colors.amber, BlendMode.srcIn),
                 ),
               ),
             TextButton.icon(
@@ -99,7 +100,8 @@ class ProjectLinks extends StatelessWidget {
               icon: SvgPicture.asset(
                 'assets/icons/github.svg',
                 height: 20,
-                color: Colors.amber,
+                colorFilter:
+                    const ColorFilter.mode(Colors.amber, BlendMode.srcIn),
               ),
             ),
           if (project.screenshots != null && project.screenshots!.isNotEmpty)
@@ -147,7 +149,8 @@ class ProjectLinks extends StatelessWidget {
               icon: SvgPicture.asset(
                 'assets/icons/github.svg',
                 height: 20,
-                color: Colors.amber,
+                colorFilter:
+                    const ColorFilter.mode(Colors.amber, BlendMode.srcIn),
               ),
             ),
           TextButton.icon(
@@ -205,7 +208,8 @@ class ProjectLinks extends StatelessWidget {
               icon: SvgPicture.asset(
                 'assets/icons/github.svg',
                 height: 20,
-                color: Colors.amber,
+                colorFilter:
+                    const ColorFilter.mode(Colors.amber, BlendMode.srcIn),
               ),
             ),
           TextButton.icon(

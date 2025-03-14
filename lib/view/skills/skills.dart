@@ -12,10 +12,10 @@ class SkillsPage extends StatefulWidget {
   const SkillsPage({super.key});
 
   @override
-  _SkillsPageState createState() => _SkillsPageState();
+  SkillsPageState createState() => SkillsPageState();
 }
 
-class _SkillsPageState extends State<SkillsPage>
+class SkillsPageState extends State<SkillsPage>
     with SingleTickerProviderStateMixin {
   late ScrollController _scrollController;
   late Ticker _ticker;

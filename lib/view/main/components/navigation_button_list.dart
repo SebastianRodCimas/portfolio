@@ -32,15 +32,6 @@ class NavigationButtonList extends StatelessWidget {
                     // Navigation logic
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
-                    );
-                  },
-                  text: 'About me'),
-              NavigationTextButton(
-                  onTap: () {
-                    // Navigation logic
-                    Navigator.push(
-                      context,
                       MaterialPageRoute(builder: (context) => ProjectsView()),
                     );
                   },
