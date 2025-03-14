@@ -103,7 +103,6 @@ class IntroBody extends StatelessWidget {
                   );
                 },
                 child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'LEARN MORE ',
@@ -125,7 +124,7 @@ class IntroBody extends StatelessWidget {
               const AnimatedImageContainer(),
               const SizedBox(height: defaultPadding),
               const Text(
-                'SKILLS',
+                'Skills',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white,
@@ -248,7 +247,7 @@ class IntroBody extends StatelessWidget {
 
         const SizedBox(height: defaultPadding),
         const Text(
-          'SKILLS',
+          'Skills',
           style: TextStyle(
             fontSize: 16,
             color: Colors.white,
@@ -372,7 +371,7 @@ class IntroBody extends StatelessWidget {
 
         const SizedBox(height: defaultPadding),
         const Text(
-          'SKILLS',
+          'Skills',
           style: TextStyle(
             fontSize: 16,
             color: Colors.white,
@@ -486,7 +485,7 @@ class IntroBody extends StatelessWidget {
 
         const SizedBox(height: defaultPadding),
         const Text(
-          'SKILLS',
+          'Skills',
           style: TextStyle(
             fontSize: 16,
             color: Colors.white,
