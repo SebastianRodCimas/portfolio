@@ -5,7 +5,6 @@ import 'package:flutter_portfolio/view/main/components/navigation_bar.dart';
 import 'package:flutter_portfolio/view/main/components/navigation_button_list.dart';
 import 'package:flutter_portfolio/view%20model/responsive.dart';
 
-
 class AnimatedLine extends StatefulWidget {
   final double maxHeight;
   final Duration duration;
@@ -112,7 +111,7 @@ class TimelinePage extends StatelessWidget {
   final List<TimelineEvent> events2 = [
     TimelineEvent(
       title: "Project co-director/Developper",
-      date: "Novembre, 2024 - Present",
+      date: "November, 2024 - Present",
       description:
           "Website referencing the different genres of electronic music.",
       isSchool: false,
@@ -123,7 +122,7 @@ class TimelinePage extends StatelessWidget {
       title: "Project co-director/Developper",
       date: "March 2023 - June, 2023",
       description:
-          "Website to reserve a time to go boating on the shores of the Etangs de l'Or.",
+          "Website to book time slots for boating on the shores of Etangs de l'Or.",
       isSchool: false,
       isPersonnal: true,
       icon: Icons.directions_boat,
@@ -132,7 +131,7 @@ class TimelinePage extends StatelessWidget {
       title: "Developper/Data Manager",
       date: "April 2022 - July 2022",
       description:
-          "Desktop application to manage the database of an association that organizes Spanish courses.",
+          "Desktop application for managing the database of an association that organizes Spanish language courses.",
       isSchool: false,
       isPersonnal: true,
       icon: Icons.dataset_linked_rounded,
@@ -141,7 +140,7 @@ class TimelinePage extends StatelessWidget {
       title: "Developper",
       date: "September, 2020",
       description:
-          "Plug connected or we could see these consumptions on a website.\n\nWinner of the workshop France 2020 competition.",
+          "Smart plug used to monitor consumption data via a web platform.\n\nWinner of the France 2020 Workshop Competition.",
       isSchool: false,
       isPersonnal: true,
       icon: Icons.electrical_services,

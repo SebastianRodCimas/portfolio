@@ -39,7 +39,7 @@ class ProjectLinks extends StatelessWidget {
                 },
                 icon: SvgPicture.asset(
                   'assets/icons/github.svg',
-                  height: 25,
+                  height: 20,
                   colorFilter:
                       const ColorFilter.mode(Colors.amber, BlendMode.srcIn),
                 ),
@@ -65,20 +65,25 @@ class ProjectLinks extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.amber,
                   fontWeight: FontWeight.bold,
-                  fontSize: 12,
+                  fontSize: 10,
                 ),
               ),
             ),
           ],
         ),
-        const SizedBox(height: defaultPadding / 5),
-        Text(
-          maxLines: 2,
-          project.projectType,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
+        const SizedBox(height: 1), // Espacement entre le bloc et projectType
+        Container(
+          height: 12, // FIXED height for alignment across all cards
+          alignment: Alignment.centerLeft,
+          child: Text(
+            project.projectType,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
           ),
         ),
       ],
@@ -237,14 +242,20 @@ class ProjectLinks extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: defaultPadding / 5),
-          Text(
-            maxLines: 2,
-            project.projectType,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 10,
+          SizedBox(
+            height: 20, // ou plus selon la taille visuelle souhaitée
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                project.projectType,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
+              ),
             ),
           ),
         ],

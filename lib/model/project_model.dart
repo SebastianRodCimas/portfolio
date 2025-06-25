@@ -44,7 +44,7 @@ List<Project> projectList = [
     [
       'assets/images/screenshot/dgclass.png',
     ],
-    'Personnal - Current project - 2025',
+    'Personal - Current project - 2025',
   ),
   Project(
     'Election Prediction AI',

@@ -86,7 +86,7 @@ class IntroBody extends StatelessWidget {
               ),
               const SizedBox(height: defaultPadding / 2),
               const Text(
-                'My years of experience have enabled me to work autonomously while making key decisions\n'
+                'My years of experience have enabled me to work independently while making key decisions\n'
                 'to successfully execute each project undertaken during my work-study program',
                 style: TextStyle(
                     fontSize: 14,
@@ -207,7 +207,7 @@ class IntroBody extends StatelessWidget {
         ),
         const SizedBox(height: defaultPadding / 2),
         const Text(
-          'My years of experience have enabled me to work autonomously while making key decisions\n'
+          'My years of experience have enabled me to work independently while making key decisions\n'
           'to successfully execute each project undertaken during my work-study program',
           style: TextStyle(
               fontSize: 14,
@@ -331,7 +331,7 @@ class IntroBody extends StatelessWidget {
         ),
         const SizedBox(height: defaultPadding / 2),
         const Text(
-          'My years of experience have enabled me to work autonomously while making key decisions\n'
+          'My years of experience have enabled me to work independently while making key decisions\n'
           'to successfully execute each project undertaken during my work-study program',
           style: TextStyle(
               fontSize: 14,
@@ -445,7 +445,7 @@ class IntroBody extends StatelessWidget {
         ),
         const SizedBox(height: defaultPadding / 2),
         const Text(
-          'My years of experience have enabled me to work autonomously while making key decisions\n'
+          'My years of experience have enabled me to work independently while making key decisions\n'
           'to successfully execute each project undertaken during my work-study program',
           style: TextStyle(
               fontSize: 14,

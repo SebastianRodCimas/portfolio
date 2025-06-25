@@ -153,7 +153,7 @@ class SkillsPageState extends State<SkillsPage>
         elevation: 0,
         flexibleSpace: const Padding(
           padding: EdgeInsets.all(1.0),
-          child: Column(children: [
+          child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Row(
               children: [Spacer(), NavigationButtonList(), Spacer()],
             ),

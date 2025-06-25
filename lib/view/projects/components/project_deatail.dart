@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/view/projects/components/project_link.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../model/project_model.dart';
-import '../../../res/constants.dart';
 
 class ProjectDetail extends StatefulWidget {
   final int index;
@@ -16,14 +17,14 @@ class ProjectDetail extends StatefulWidget {
 class _ProjectDetailState extends State<ProjectDetail>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<Offset> _animation;
+
   // Programming Language Icons with Continuous Animation
   // Définir des tailles spécifiques pour chaque projet
   Map<String, double> logoSizes = {
     'SCALIA Mobile': 40,
-    'TekNow': 35,
-    'Election Prediction AI': 45, // Projet avec des icônes plus grandes
-    'Connected socket - ADEE': 50,
+    'TekNow': 40,
+    'Election Prediction AI': 40, // Projet avec des icônes plus grandes
+    'Connected socket - ADEE': 40,
     'Logiciel ALX Technology': 40,
     'Customer File Management': 40,
     'Espana Cultura': 50,
@@ -55,16 +56,7 @@ class _ProjectDetailState extends State<ProjectDetail>
       vsync: this,
     )..repeat(reverse: true); // Continuous animation
 
-    int logoCount = projectList[widget.index].languages.length;
-    double startOffset =
-        0.1 + (logoCount * 0.05); // Adjust start offset based on logo count
-    double endOffset =
-        0 - (logoCount * 0.05); // Adjust end offset based on logo count
-
-    _animation = Tween<Offset>(
-      begin: Offset(startOffset, 0.0), // Start from the far right
-      end: Offset(endOffset, 0.0), // Move to the far left
-    ).animate(_controller);
+    (_controller);
   }
 
   @override
@@ -110,19 +102,17 @@ class _ProjectDetailState extends State<ProjectDetail>
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.sizeOf(context);
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Project Name
+        // Titre
         Align(
           alignment: Alignment.topCenter,
           child: ShaderMask(
-            shaderCallback: (bounds) {
-              return const LinearGradient(
-                colors: [Colors.pink, Colors.blue],
-              ).createShader(bounds);
-            },
+            shaderCallback: (bounds) => const LinearGradient(
+              colors: [Colors.pink, Colors.blue],
+            ).createShader(bounds),
             child: Text(
               projectList[widget.index].name,
               style: Theme.of(context).textTheme.headlineSmall!.copyWith(
@@ -134,26 +124,19 @@ class _ProjectDetailState extends State<ProjectDetail>
             ),
           ),
         ),
-        if (isMobile(context) || isDesktop(context))
-          const SizedBox(height: defaultPadding),
+        const SizedBox(height: 12),
 
-        // Project Description
-        Text(projectList[widget.index].description,
-            style:
-                const TextStyle(color: Colors.white, height: 1.5, fontSize: 12),
-            maxLines: size.width > 700 && size.width < 750
-                ? 3
-                : size.width < 470
-                    ? 2
-                    : size.width > 600 && size.width < 700
-                        ? 6
-                        : size.width > 900 && size.width < 1060
-                            ? 6
-                            : 4,
-            overflow: TextOverflow.ellipsis),
-        const SizedBox(height: defaultPadding / 10),
+        // Description
+        Text(
+          projectList[widget.index].description,
+          style:
+              const TextStyle(color: Colors.white70, height: 1.5, fontSize: 12),
+          maxLines: 4,
+          overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(height: 16),
 
-        // Project Logo
+        // Logo principal
         Center(
           child: Image.asset(
             projectList[widget.index].image,
@@ -161,42 +144,84 @@ class _ProjectDetailState extends State<ProjectDetail>
             height: getProjectLogoSize(),
           ),
         ),
+        const SizedBox(height: 16),
 
-        if (isMobile(context) || isDesktop(context))
-          const SizedBox(height: defaultPadding / 10),
-
+        // Logos technos
         SizedBox(
-          height: 80, // Adapter la hauteur pour éviter les coupures
-          child: AnimatedBuilder(
-            animation: _animation,
-            builder: (context, child) {
-              return FractionalTranslation(
-                translation: _animation.value,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: projectList[widget.index].languages.map((logo) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 7.0),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          logo,
-                          width: getLanguageLogoSize(),
-                          height: getLanguageLogoSize(),
-                        ),
+          height: 65,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: projectList[widget.index]
+                .languages
+                .map((logo) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                      child: Image.asset(
+                        logo,
+                        height: getLanguageLogoSize(),
+                        width: getLanguageLogoSize(),
                       ),
-                    );
-                  }).toList(),
-                ),
-              );
-            },
+                    ))
+                .toList(),
           ),
         ),
+        const SizedBox(height: 16),
 
-        const SizedBox(height: defaultPadding),
-        // Project Links
-        ProjectLinks(
-          project: projectList[widget.index],
+        // GitHub et Screenshots
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (projectList[widget.index].link != null &&
+                projectList[widget.index].link!.isNotEmpty)
+              IconButton(
+                onPressed: () =>
+                    launchUrl(Uri.parse(projectList[widget.index].link!)),
+                icon: SvgPicture.asset(
+                  'assets/icons/github.svg',
+                  height: 24,
+                  colorFilter:
+                      const ColorFilter.mode(Colors.amber, BlendMode.srcIn),
+                ),
+              ),
+            if (projectList[widget.index].screenshots != null &&
+                projectList[widget.index].screenshots!.isNotEmpty)
+              TextButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ScreenshotPage(
+                          screenshots: projectList[widget.index].screenshots!),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.image, color: Colors.amber),
+                label: const Text(
+                  'Screenshots',
+                  style: TextStyle(
+                    color: Colors.amber,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+          ],
+        ),
+
+        // Type de projet aligné
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 1),
+          height: 24,
+          alignment: Alignment.centerLeft,
+          child: Text(
+            projectList[widget.index].projectType,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+          ),
         ),
       ],
     );
