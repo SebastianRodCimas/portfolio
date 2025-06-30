@@ -39,8 +39,8 @@ List<Project> projectList = [
     [
       'assets/icons/angular.png',
       'assets/icons/tensorflow.png',
-      'assets/icons/nodejs.png'
-          'assets/icons/postgre.png'
+      'assets/icons/nodejs.png',
+      'assets/icons/postgre.png'
     ],
     [
       'assets/images/screenshot/dgclass.png',
@@ -55,7 +55,7 @@ List<Project> projectList = [
     [
       'assets/icons/pandas.png',
       'assets/images/logiciel/power_bi.png',
-      'assets/icons/scikit-learn.png'
+      'assets/icons/tensorflow.png',
     ],
     [
       'assets/images/screenshot/diagr-ia.png',

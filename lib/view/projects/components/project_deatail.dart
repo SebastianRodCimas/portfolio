@@ -22,13 +22,13 @@ class _ProjectDetailState extends State<ProjectDetail>
   // Définir des tailles spécifiques pour chaque projet
   Map<String, double> logoSizes = {
     'SCALIA Mobile': 40,
-    'TekNow': 40,
-    'Election Prediction AI': 40, // Projet avec des icônes plus grandes
-    'Connected socket - ADEE': 40,
-    'Logiciel ALX Technology': 40,
+    'TekNow': 50,
+    'Election Prediction AI': 55, // Projet avec des icônes plus grandes
+    'Connected socket - ADEE': 60,
+    'Logiciel ALX Technology': 50,
     'Customer File Management': 40,
     'Espana Cultura': 50,
-    'Agile IT Project Management': 55,
+    'Agile IT Project Management': 50,
   };
 
 // Taille par défaut si un projet n'est pas dans la liste
@@ -36,10 +36,10 @@ class _ProjectDetailState extends State<ProjectDetail>
 
   Map<String, double> projectLogoSizes = {
     'SCALIA Mobile': 70,
-    'TekNow': 104,
-    'Election Prediction AI': 100, // Projet avec un logo plus grand
+    'TekNow': 110,
+    'Election Prediction AI': 80, // Projet avec un logo plus grand
     'Connected socket - ADEE': 90,
-    'Logiciel ALX Technology': 90,
+    'Logiciel ALX Technology': 160,
     'Customer File Management': 90,
     'Espana Cultura': 80,
     'Agile IT Project Management': 65,
