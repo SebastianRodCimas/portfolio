@@ -37,9 +37,10 @@ List<Project> projectList = [
     'assets/icons/Tecknow.png',
     'https://github.com/SebastianRodCimas/TekNow',
     [
-      'assets/icons/flutter.png',
-      'assets/icons/dart.png',
-      'assets/icons/firebase.png'
+      'assets/icons/angular.png',
+      'assets/icons/tensorflow.png',
+      'assets/icons/nodejs.png'
+          'assets/icons/postgre.png'
     ],
     [
       'assets/images/screenshot/dgclass.png',
