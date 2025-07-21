@@ -127,12 +127,17 @@ class _ProjectDetailState extends State<ProjectDetail>
         const SizedBox(height: 12),
 
         // Description
-        Text(
-          projectList[widget.index].description,
-          style:
-              const TextStyle(color: Colors.white70, height: 1.5, fontSize: 12),
-          maxLines: 4,
-          overflow: TextOverflow.ellipsis,
+        ShaderMask(
+          shaderCallback: (bounds) => const LinearGradient(
+            colors: [Colors.pink, Colors.blue],
+          ).createShader(bounds),
+          child: Text(
+            projectList[widget.index].description,
+            style: const TextStyle(
+                color: Colors.white70, height: 1.5, fontSize: 12),
+            maxLines: 4,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
         const SizedBox(height: 16),
 
