@@ -96,8 +96,8 @@ List<Project> projectList = [
     'assets/icons/syrius.png',
     null,
     [
-      'assets/icons/flutter.png',
-      'assets/icons/dart.png',
+      'assets/icons/swift.png',
+      'assets/icons/kotlin.png',
       'assets/icons/xml.png',
       'assets/icons/apps.png'
     ],
