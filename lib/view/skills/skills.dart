@@ -185,9 +185,10 @@ class SkillsPageState extends State<SkillsPage>
       'assets/images/logiciel/android_studio.png',
       'assets/images/logiciel/docker.png',
       'assets/images/logiciel/ganttproject.png',
-      'assets/images/logiciel/whimsical.png',
-      'assets/images/logiciel/ij.png',
+      'assets/images/logiciel/jira.png',
+      'assets/images/logiciel/Notion.png',
       'assets/images/logiciel/power_bi.png',
+      'assets/images/logiciel/Vmware.png',
     ];
 
     return SizedBox(

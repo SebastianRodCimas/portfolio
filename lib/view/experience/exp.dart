@@ -10,11 +10,11 @@ class AnimatedLine extends StatefulWidget {
   final bool isLastItem;
 
   const AnimatedLine({
-    Key? key,
+    super.key,
     required this.maxHeight,
     this.duration = const Duration(seconds: 2),
     this.isLastItem = false,
-  }) : super(key: key);
+  });
 
   @override
   State<AnimatedLine> createState() => _AnimatedLineState();
@@ -151,8 +151,6 @@ class TimelinePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
