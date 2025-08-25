@@ -16,8 +16,6 @@ class ProjectDetail extends StatefulWidget {
 
 class _ProjectDetailState extends State<ProjectDetail>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
   // Programming Language Icons with Continuous Animation
   // Définir des tailles spécifiques pour chaque projet
   Map<String, double> logoSizes = {
@@ -48,23 +46,6 @@ class _ProjectDetailState extends State<ProjectDetail>
 // Taille par défaut si un projet n'est pas dans la liste
   double defaultProjectLogoSize = 70;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(seconds: 4), // Adjust the duration as needed
-      vsync: this,
-    )..repeat(reverse: true); // Continuous animation
-
-    (_controller);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   bool isMobile(BuildContext context) =>
       MediaQuery.of(context).size.width < 600;
   bool isLargeMobile(BuildContext context) =>
@@ -76,159 +57,230 @@ class _ProjectDetailState extends State<ProjectDetail>
   bool isDesktop(BuildContext context) =>
       MediaQuery.of(context).size.width >= 1200;
 
-  // Ajuster les tailles en fonction du type d'écran
+  @override
+  Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final isMobile = screenSize.width < 600;
+    final isSmallMobile = screenSize.width < 350;
+
+    // Tailles de base augmentées pour les logos
+    Map<String, double> updatedLogoSizes = {
+      'SCALIA Mobile': 50, // Augmenté de 40 à 50
+      'TekNow': 60, // Augmenté de 50 à 60
+      'Election Prediction AI': 65, // Augmenté de 55 à 65
+      'Connected socket - ADEE': 70, // Augmenté de 60 à 70
+      'Logiciel ALX Technology': 60, // Augmenté de 50 à 60
+      'Customer File Management': 50, // Augmenté de 40 à 50
+      'Espana Cultura': 60, // Augmenté de 50 à 60
+      'Agile IT Project Management': 60, // Augmenté de 50 à 60
+    };
+
+    double updatedDefaultSize = 50; // Augmenté de 40 à 50
+
+    return SingleChildScrollView(
+      child: IntrinsicHeight(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 8.0 : 16.0,
+            vertical: isMobile ? 6.0 : 12.0,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Titre
+              ShaderMask(
+                shaderCallback: (bounds) => const LinearGradient(
+                  colors: [Colors.pink, Colors.blue],
+                ).createShader(bounds),
+                child: Text(
+                  projectList[widget.index].name,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: isSmallMobile ? 18 : (isMobile ? 21 : 25),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              SizedBox(height: isMobile ? 3 : 6),
+
+              // Description
+              ShaderMask(
+                shaderCallback: (bounds) => const LinearGradient(
+                  colors: [Colors.pink, Colors.blue],
+                ).createShader(bounds),
+                child: Text(
+                  projectList[widget.index].description,
+                  style: TextStyle(
+                    color: Colors.white70,
+                    height: 1.3,
+                    fontSize: isSmallMobile ? 10 : (isMobile ? 11 : 12),
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: isMobile ? 8 : 12),
+
+              // Logo principal (taille augmentée)
+              Center(
+                child: SizedBox(
+                  height: isMobile ? 100 : 130, // Augmenté de 80/100 à 100/130
+                  child: Image.asset(
+                    projectList[widget.index].image,
+                    width: getProjectLogoSize() *
+                        (isMobile ? 0.85 : 1.0), // Facteur augmenté
+                    height: getProjectLogoSize() *
+                        (isMobile ? 0.85 : 1.0), // Facteur augmenté
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              SizedBox(height: isMobile ? 10 : 14),
+
+              // Section logos technos (améliorée)
+              SizedBox(
+                height: isMobile ? 50 : 60, // Augmenté de 40/50 à 50/60
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minWidth: constraints.maxWidth,
+                        ),
+                        child: Wrap(
+                          alignment: WrapAlignment.center,
+                          spacing: 8.0,
+                          runSpacing: 8.0,
+                          children: projectList[widget.index]
+                              .languages
+                              .map((logo) => SizedBox(
+                                    width: (updatedLogoSizes[
+                                                projectList[widget.index]
+                                                    .name] ??
+                                            updatedDefaultSize) *
+                                        (isMobile ? 0.8 : 1.0),
+                                    height: (updatedLogoSizes[
+                                                projectList[widget.index]
+                                                    .name] ??
+                                            updatedDefaultSize) *
+                                        (isMobile ? 0.8 : 1.0),
+                                    child: Image.asset(
+                                      logo,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ))
+                              .toList(),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: isMobile ? 8 : 12),
+
+              // GitHub et Screenshots
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (projectList[widget.index].link != null &&
+                      projectList[widget.index].link!.isNotEmpty)
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                      onPressed: () =>
+                          launchUrl(Uri.parse(projectList[widget.index].link!)),
+                      icon: SvgPicture.asset(
+                        'assets/icons/github.svg',
+                        height: isMobile ? 20 : 24, // Légèrement augmenté
+                        colorFilter: const ColorFilter.mode(
+                            Colors.amber, BlendMode.srcIn),
+                      ),
+                    ),
+                  if (projectList[widget.index].screenshots != null &&
+                      projectList[widget.index].screenshots!.isNotEmpty)
+                    TextButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ScreenshotPage(
+                              screenshots:
+                                  projectList[widget.index].screenshots!,
+                            ),
+                          ),
+                        );
+                      },
+                      icon: Icon(Icons.image,
+                          color: Colors.amber, size: isMobile ? 16 : 18),
+                      label: Text(
+                        'Screenshots',
+                        style: TextStyle(
+                          color: Colors.amber,
+                          fontWeight: FontWeight.bold,
+                          fontSize: isMobile ? 11 : 12,
+                        ),
+                      ),
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: isMobile ? 6 : 10, vertical: 4),
+                      ),
+                    ),
+                ],
+              ),
+
+              // Type de projet
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                alignment: Alignment.center,
+                child: Text(
+                  projectList[widget.index].projectType,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: isMobile ? 10 : 11,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+// Mettez à jour aussi ces méthodes pour utiliser les nouvelles tailles
   double getProjectLogoSize() {
     double baseSize = projectLogoSizes[projectList[widget.index].name] ??
         defaultProjectLogoSize;
 
+    // Augmentez les tailles de base dans votre map projectLogoSizes
+    // ou ajoutez un facteur multiplicateur ici
+    baseSize *= 1.05; // Augmentation générale de 5%
+
     if (isMobile(context)) {
-      return baseSize * 0.8; // Réduire la taille des logos pour mobile
+      return baseSize * 0.8;
     } else if (isTablet(context)) {
-      return baseSize * 0.9; // Taille légèrement réduite pour les tablettes
+      return baseSize * 0.9;
     }
-    return baseSize; // Taille normale pour Desktop
+    return baseSize;
   }
 
   double getLanguageLogoSize() {
+    // Utilisez les nouvelles tailles
     double baseSize = logoSizes[projectList[widget.index].name] ?? defaultSize;
 
     if (isMobile(context)) {
-      return baseSize * 0.75; // Réduction pour mobile
+      return baseSize;
     } else if (isTablet(context)) {
-      return baseSize * 0.85; // Taille ajustée pour tablette
+      return baseSize;
     }
-    return baseSize; // Taille normale pour Desktop
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        // Titre
-        Align(
-          alignment: Alignment.topCenter,
-          child: ShaderMask(
-            shaderCallback: (bounds) => const LinearGradient(
-              colors: [Colors.pink, Colors.blue],
-            ).createShader(bounds),
-            child: Text(
-              projectList[widget.index].name,
-              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ),
-        const SizedBox(height: 12),
-
-        // Description
-        ShaderMask(
-          shaderCallback: (bounds) => const LinearGradient(
-            colors: [Colors.pink, Colors.blue],
-          ).createShader(bounds),
-          child: Text(
-            projectList[widget.index].description,
-            style: const TextStyle(
-                color: Colors.white70, height: 1.5, fontSize: 12),
-            maxLines: 4,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        // Logo principal
-        Center(
-          child: Image.asset(
-            projectList[widget.index].image,
-            width: getProjectLogoSize(),
-            height: getProjectLogoSize(),
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        // Logos technos
-        SizedBox(
-          height: 65,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: projectList[widget.index]
-                .languages
-                .map((logo) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                      child: Image.asset(
-                        logo,
-                        height: getLanguageLogoSize(),
-                        width: getLanguageLogoSize(),
-                      ),
-                    ))
-                .toList(),
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        // GitHub et Screenshots
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (projectList[widget.index].link != null &&
-                projectList[widget.index].link!.isNotEmpty)
-              IconButton(
-                onPressed: () =>
-                    launchUrl(Uri.parse(projectList[widget.index].link!)),
-                icon: SvgPicture.asset(
-                  'assets/icons/github.svg',
-                  height: 24,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.amber, BlendMode.srcIn),
-                ),
-              ),
-            if (projectList[widget.index].screenshots != null &&
-                projectList[widget.index].screenshots!.isNotEmpty)
-              TextButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ScreenshotPage(
-                          screenshots: projectList[widget.index].screenshots!),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.image, color: Colors.amber),
-                label: const Text(
-                  'Screenshots',
-                  style: TextStyle(
-                    color: Colors.amber,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                  ),
-                ),
-              ),
-          ],
-        ),
-
-        // Type de projet aligné
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 1),
-          height: 24,
-          alignment: Alignment.centerLeft,
-          child: Text(
-            projectList[widget.index].projectType,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
-            ),
-          ),
-        ),
-      ],
-    );
+    return baseSize;
   }
 }

@@ -11,6 +11,7 @@ class TopNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Spacer(),

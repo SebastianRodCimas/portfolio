@@ -26,21 +26,22 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    double padding = MediaQuery.of(context).size.width * 0.02;
+    return Scaffold(
       backgroundColor: bgColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            AnimatedImageContainer(
+            const AnimatedImageContainer(
               width: 300,
               height: 200,
             ),
             SizedBox(
-              height: defaultPadding,
+              height: padding,
             ),
-            AnimatedLoadingText(),
+            const AnimatedLoadingText(),
           ],
         ),
       ),

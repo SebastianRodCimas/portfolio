@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../res/constants.dart';
 import '../../../view model/responsive.dart';
 
 class AnimatedImageContainer extends StatefulWidget {
@@ -32,6 +31,7 @@ class AnimatedImageContainerState extends State<AnimatedImageContainer>
 
   @override
   Widget build(BuildContext context) {
+    double padding = MediaQuery.of(context).size.width * 0.02;
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -41,7 +41,7 @@ class AnimatedImageContainerState extends State<AnimatedImageContainer>
           child: Container(
             height: widget.height!,
             width: widget.width!,
-            padding: const EdgeInsets.all(defaultPadding / 4),
+            padding: EdgeInsets.all(padding / 4),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               gradient: const LinearGradient(colors: [

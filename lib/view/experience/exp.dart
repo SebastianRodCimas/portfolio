@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/res/constants.dart';
 import 'package:flutter_portfolio/view/main/components/navigation_bar.dart';
 import 'package:flutter_portfolio/view/main/components/navigation_button_list.dart';
-import 'package:flutter_portfolio/view%20model/responsive.dart';
 
 class AnimatedLine extends StatefulWidget {
   final double maxHeight;
   final Duration duration;
+  final bool isLastItem;
 
   const AnimatedLine({
     Key? key,
     required this.maxHeight,
     this.duration = const Duration(seconds: 2),
+    this.isLastItem = false,
   }) : super(key: key);
 
   @override
@@ -36,7 +37,6 @@ class _AnimatedLineState extends State<AnimatedLine>
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 
-    // Démarrer l'animation dès que la page est affichée
     _controller.forward();
   }
 
@@ -52,7 +52,7 @@ class _AnimatedLineState extends State<AnimatedLine>
       animation: _animation,
       builder: (context, child) {
         return Container(
-          height: _animation.value,
+          height: widget.isLastItem ? 0.5 : _animation.value,
           width: 2,
           color: Colors.teal.shade700,
         );
@@ -175,86 +175,13 @@ class TimelinePage extends StatelessWidget {
               height: 80,
               child: TopNavigationBar(),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ShaderMask(
-                          shaderCallback: (bounds) {
-                            return const LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [Colors.pinkAccent, Colors.blueAccent],
-                              stops: [0.2, 0.8],
-                            ).createShader(bounds);
-                          },
-                          child: const Text(
-                            "Professional Experience",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.2,
-                              color: Colors.white,
-                              shadows: [
-                                Shadow(
-                                  offset: Offset(1, 1),
-                                  blurRadius: 3.0,
-                                  color: Colors.black26,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        buildTimeline(context, events1, screenHeight),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 20), // Espace entre les deux timelines
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ShaderMask(
-                          shaderCallback: (bounds) {
-                            return const LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [Colors.pinkAccent, Colors.blueAccent],
-                              stops: [0.2, 0.8],
-                            ).createShader(bounds);
-                          },
-                          child: const Text(
-                            "Personal Experience",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.2,
-                              color: Colors.white,
-                              shadows: [
-                                Shadow(
-                                  offset: Offset(1, 1),
-                                  blurRadius: 3.0,
-                                  color: Colors.black26,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        buildTimeline(context, events2, screenHeight),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(child: buildTimeline(context, events1)),
+                const SizedBox(width: 20),
+                Expanded(child: buildTimeline(context, events2)),
+              ],
             ),
           ],
         ),
@@ -262,14 +189,15 @@ class TimelinePage extends StatelessWidget {
     );
   }
 
-  Widget buildTimeline(
-      BuildContext context, List<TimelineEvent> events, double screenHeight) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: events.length,
-      itemBuilder: (context, index) {
+  Widget buildTimeline(BuildContext context, List<TimelineEvent> events) {
+    return Column(
+      children: List.generate(events.length, (index) {
         final event = events[index];
+        final isLastItem = index == events.length - 1;
+
+        // Utilisation d'un GlobalKey pour mesurer la hauteur réelle du contenu
+        final contentKey = GlobalKey();
+
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -277,7 +205,7 @@ class TimelinePage extends StatelessWidget {
             Column(
               children: [
                 CircleAvatar(
-                  radius: 20,
+                  radius: 17,
                   backgroundColor: event.isPersonnal
                       ? Colors.purpleAccent
                       : (event.isSchool
@@ -286,116 +214,81 @@ class TimelinePage extends StatelessWidget {
                   child: Icon(
                     event.icon,
                     color: Colors.white,
+                    size: 17,
                   ),
                 ),
-                if (index != events.length - 1)
-                  AnimatedLine(
-                    maxHeight: Responsive.isMobile(context)
-                        ? screenHeight * 0.25 // Hauteur pour mobile
-                        : screenHeight * 0.12, // Hauteur pour desktop
-                    duration: const Duration(seconds: 4),
-                  ),
-                if (index == events.length - 1)
-                  Container(
-                    height:
-                        0.5, // Ajustez cette valeur pour que la ligne aille jusqu'au bout
-                    width: 2,
-                    color: Colors.teal.shade700,
+                if (!isLastItem)
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Container(
+                        width: 2,
+                        color: Colors.teal.shade700,
+                        // Utilisation d'un SizedBox avec une hauteur fixe optimisée
+                        child: const SizedBox(
+                          height:
+                              75, // Hauteur fixe optimisée pour iPhone 12 Pro
+                        ),
+                      );
+                    },
                   ),
               ],
             ),
-            const SizedBox(width: 20),
-            // Contenu texte
+            const SizedBox(width: 15),
+            // Contenu texte avec mesure de hauteur
             Expanded(
               child: Column(
+                key: contentKey,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   ShaderMask(
-                    shaderCallback: (bounds) {
-                      return const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [Colors.pinkAccent, Colors.blueAccent],
-                        stops: [0.2, 0.8],
-                      ).createShader(bounds);
-                    },
+                    shaderCallback: (bounds) => const LinearGradient(
+                      colors: [Colors.pinkAccent, Colors.blueAccent],
+                    ).createShader(bounds),
                     child: Text(
                       event.date,
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 3.0,
-                            color: Colors.black26,
-                          ),
-                        ],
+                        height: 1.1,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  ShaderMask(
+                    shaderCallback: (bounds) => const LinearGradient(
+                      colors: [Colors.pinkAccent, Colors.blueAccent],
+                    ).createShader(bounds),
+                    child: Text(
+                      event.title,
+                      style: const TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        height: 1.1,
                       ),
                     ),
                   ),
                   const SizedBox(height: 5),
                   ShaderMask(
-                    shaderCallback: (bounds) {
-                      return const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [Colors.pinkAccent, Colors.blueAccent],
-                        stops: [0.2, 0.8],
-                      ).createShader(bounds);
-                    },
-                    child: Text(
-                      event.title,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 3.0,
-                            color: Colors.black26,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  ShaderMask(
-                    shaderCallback: (bounds) {
-                      return const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [Colors.pinkAccent, Colors.blueAccent],
-                        stops: [0.2, 0.8],
-                      ).createShader(bounds);
-                    },
+                    shaderCallback: (bounds) => const LinearGradient(
+                      colors: [Colors.pinkAccent, Colors.blueAccent],
+                    ).createShader(bounds),
                     child: Text(
                       event.description,
                       style: const TextStyle(
-                        fontSize: 12,
+                        fontSize: 10,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 3.0,
-                            color: Colors.black26,
-                          ),
-                        ],
+                        height: 1.2,
                       ),
                     ),
                   ),
+                  if (!isLastItem) const SizedBox(height: 4),
                 ],
               ),
             ),
           ],
         );
-      },
+      }),
     );
   }
 }
