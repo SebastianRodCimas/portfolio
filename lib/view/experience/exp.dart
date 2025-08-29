@@ -246,7 +246,7 @@ class TimelinePage extends StatelessWidget {
                     child: Text(
                       event.date,
                       style: const TextStyle(
-                        fontSize: 12,
+                        fontSize: 13,
                         fontWeight: FontWeight.bold,
                         height: 1.1,
                       ),
@@ -260,7 +260,7 @@ class TimelinePage extends StatelessWidget {
                     child: Text(
                       event.title,
                       style: const TextStyle(
-                        fontSize: 11,
+                        fontSize: 12,
                         fontWeight: FontWeight.bold,
                         height: 1.1,
                       ),
@@ -274,9 +274,9 @@ class TimelinePage extends StatelessWidget {
                     child: Text(
                       event.description,
                       style: const TextStyle(
-                        fontSize: 10,
+                        fontSize: 11,
                         fontWeight: FontWeight.bold,
-                        height: 1.2,
+                        height: 1.1,
                       ),
                     ),
                   ),
