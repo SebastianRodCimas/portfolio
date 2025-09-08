@@ -110,7 +110,7 @@ class TimelinePage extends StatelessWidget {
 
   final List<TimelineEvent> events2 = [
     TimelineEvent(
-      title: "Project co-director/Developper",
+      title: "Project co-director/Developer",
       date: "November, 2024 - Present",
       description:
           "Website referencing the different genres of electronic music.",
@@ -119,7 +119,7 @@ class TimelinePage extends StatelessWidget {
       icon: Icons.music_note,
     ),
     TimelineEvent(
-      title: "Project co-director/Developper",
+      title: "Project co-director/Developer",
       date: "March 2023 - June, 2023",
       description:
           "Website to book time slots for boating on the shores of Etangs de l'Or.",
@@ -128,7 +128,7 @@ class TimelinePage extends StatelessWidget {
       icon: Icons.directions_boat,
     ),
     TimelineEvent(
-      title: "Developper/Data Manager",
+      title: "Developer/Data Manager",
       date: "April 2022 - July 2022",
       description:
           "Desktop application for managing the database of an association that organizes Spanish language courses.",
@@ -137,7 +137,7 @@ class TimelinePage extends StatelessWidget {
       icon: Icons.dataset_linked_rounded,
     ),
     TimelineEvent(
-      title: "Developper",
+      title: "Developer",
       date: "September, 2020",
       description:
           "Smart plug used to monitor consumption data via a web platform.\n\nWinner of the France 2020 Workshop Competition.",
@@ -156,12 +156,8 @@ class TimelinePage extends StatelessWidget {
         child: Column(
           children: [
             kIsWeb
-                ? const SizedBox(
-                    height: defaultPadding * 2,
-                  )
-                : const SizedBox(
-                    height: defaultPadding / 2,
-                  ),
+                ? const SizedBox(height: defaultPadding * 2)
+                : const SizedBox(height: defaultPadding / 2),
             const Row(
               children: [
                 Spacer(),
@@ -173,13 +169,29 @@ class TimelinePage extends StatelessWidget {
               height: 80,
               child: TopNavigationBar(),
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(child: buildTimeline(context, events1)),
-                const SizedBox(width: 20),
-                Expanded(child: buildTimeline(context, events2)),
-              ],
+            LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth < 600) {
+                  // Mobile : une seule colonne
+                  return Column(
+                    children: [
+                      buildTimeline(context, events1),
+                      const SizedBox(height: 20),
+                      buildTimeline(context, events2),
+                    ],
+                  );
+                } else {
+                  // Tablette/Desktop : deux colonnes
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: buildTimeline(context, events1)),
+                      const SizedBox(width: 20),
+                      Expanded(child: buildTimeline(context, events2)),
+                    ],
+                  );
+                }
+              },
             ),
           ],
         ),
@@ -193,13 +205,9 @@ class TimelinePage extends StatelessWidget {
         final event = events[index];
         final isLastItem = index == events.length - 1;
 
-        // Utilisation d'un GlobalKey pour mesurer la hauteur réelle du contenu
-        final contentKey = GlobalKey();
-
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Icône et ligne de connexion
             Column(
               children: [
                 CircleAvatar(
@@ -216,26 +224,16 @@ class TimelinePage extends StatelessWidget {
                   ),
                 ),
                 if (!isLastItem)
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      return Container(
-                        width: 2,
-                        color: Colors.teal.shade700,
-                        // Utilisation d'un SizedBox avec une hauteur fixe optimisée
-                        child: const SizedBox(
-                          height:
-                              75, // Hauteur fixe optimisée pour iPhone 12 Pro
-                        ),
-                      );
-                    },
+                  Container(
+                    width: 2,
+                    height: 75,
+                    color: Colors.teal.shade700,
                   ),
               ],
             ),
             const SizedBox(width: 15),
-            // Contenu texte avec mesure de hauteur
             Expanded(
               child: Column(
-                key: contentKey,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
