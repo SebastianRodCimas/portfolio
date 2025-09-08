@@ -10,7 +10,7 @@ class DownloadButton extends StatelessWidget {
     return InkWell(
       onTap: () {
         launchUrl(Uri.parse(
-            'https://drive.google.com/file/d/1k7T4gVbnXkEd7uPs64YfUtRg_JYwv85m/view?usp=drive_link'));
+            'https://drive.google.com/drive/folders/11ugztSe7mluc3Rbt8Dv_rQpJCgYmQaoq?usp=sharing'));
       },
       child: Container(
         alignment: Alignment.center,
