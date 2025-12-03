@@ -19,6 +19,7 @@ class ProjectsView extends StatelessWidget {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           // Espace supérieur pour le Web ou Mobile
           const SizedBox(

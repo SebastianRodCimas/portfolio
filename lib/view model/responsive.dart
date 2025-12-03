@@ -53,3 +53,29 @@ class Responsive extends StatelessWidget {
     }
   }
 }
+
+class ResponsiveText {
+  static double getScaledTextSize(
+    BuildContext context,
+    double baseSize, {
+    double minScale = 0.9,
+    double maxScale = 1.2,
+    double breakpointMin = 320,
+    double breakpointMax = 1024,
+  }) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Si l'écran est plus petit que breakpointMin, on applique minScale
+    if (screenWidth <= breakpointMin) return baseSize * minScale;
+
+    // Si l'écran est plus grand que breakpointMax, on applique maxScale
+    if (screenWidth >= breakpointMax) return baseSize * maxScale;
+
+    // Sinon, on interpolé linéairement entre minScale et maxScale
+    final scale = minScale +
+        (maxScale - minScale) *
+            ((screenWidth - breakpointMin) / (breakpointMax - breakpointMin));
+
+    return baseSize * scale;
+  }
+}

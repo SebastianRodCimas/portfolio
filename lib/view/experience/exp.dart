@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/res/constants.dart';
+import 'package:flutter_portfolio/view%20model/responsive.dart';
 import 'package:flutter_portfolio/view/main/components/navigation_bar.dart';
 import 'package:flutter_portfolio/view/main/components/navigation_button_list.dart';
 
@@ -65,7 +66,7 @@ class TimelinePage extends StatelessWidget {
   final List<TimelineEvent> events1 = [
     TimelineEvent(
       title: "Mobile Developer Intern - Syrius Solar Industry",
-      date: "September 13, 2021 - September 16, 2022",
+      date: "September 2021 - September 2022",
       description:
           "Created mobile applications for sales representatives to facilitate and improve customer file management.",
       isSchool: false,
@@ -74,7 +75,7 @@ class TimelinePage extends StatelessWidget {
     ),
     TimelineEvent(
       title: "EPSI Montpellier - EISI Program",
-      date: "RNCP31678 Certification (Level 6 Obtained)",
+      date: "RNCP31678 Certification Level 6",
       description: "Training in application design and development.",
       isSchool: true,
       isPersonnal: false,
@@ -82,7 +83,7 @@ class TimelinePage extends StatelessWidget {
     ),
     TimelineEvent(
       title: "Web Application Developer Intern - ALX technology",
-      date: "September 20, 2022 - January 3, 2023",
+      date: "September 2022 - January 2023",
       description:
           "Developed desktop applications to improve quality for clients.",
       isSchool: false,
@@ -90,28 +91,28 @@ class TimelinePage extends StatelessWidget {
       icon: Icons.work,
     ),
     TimelineEvent(
-      title: "EPSI Montpellier - EISI Program",
-      date: "RNCP36286 Certification (Level 7 Obtained)",
-      description: "Training in computer science and information systems.",
-      isSchool: true,
-      isPersonnal: false,
-      icon: Icons.school,
-    ),
-    TimelineEvent(
       title: "Mobile Developer Intern - STIM",
-      date: "June 18, 2023 - October 11, 2024",
+      date: "June 2023 - October 2024",
       description:
           "Developed a mobile application to manage and view surveillance cameras.",
       isSchool: false,
       isPersonnal: false,
       icon: Icons.work,
     ),
+    TimelineEvent(
+      title: "EPSI Montpellier - EISI Program",
+      date: "September 2019 - November 2024 RNCP36286 Certification Level 7",
+      description: "Training in computer science and information systems.",
+      isSchool: true,
+      isPersonnal: false,
+      icon: Icons.school,
+    ),
   ];
 
   final List<TimelineEvent> events2 = [
     TimelineEvent(
-      title: "Project co-director/Developer",
-      date: "November, 2024 - Present",
+      title: "Project co-director/Lead Developer",
+      date: "December, 2024 - Present",
       description:
           "Website referencing the different genres of electronic music.",
       isSchool: false,
@@ -220,18 +221,18 @@ class TimelinePage extends StatelessWidget {
                   child: Icon(
                     event.icon,
                     color: Colors.white,
-                    size: 17,
+                    size: ResponsiveText.getScaledTextSize(context, 17),
                   ),
                 ),
                 if (!isLastItem)
                   Container(
                     width: 2,
-                    height: 75,
+                    height: ResponsiveText.getScaledTextSize(context, 75),
                     color: Colors.teal.shade700,
                   ),
               ],
             ),
-            const SizedBox(width: 15),
+            SizedBox(width: ResponsiveText.getScaledTextSize(context, 15)),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,42 +244,46 @@ class TimelinePage extends StatelessWidget {
                     ).createShader(bounds),
                     child: Text(
                       event.date,
-                      style: const TextStyle(
-                        fontSize: 13,
+                      style: TextStyle(
+                        fontSize: ResponsiveText.getScaledTextSize(context, 13),
                         fontWeight: FontWeight.bold,
                         height: 1.1,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 3),
+                  SizedBox(
+                      height: ResponsiveText.getScaledTextSize(context, 3)),
                   ShaderMask(
                     shaderCallback: (bounds) => const LinearGradient(
                       colors: [Colors.pinkAccent, Colors.blueAccent],
                     ).createShader(bounds),
                     child: Text(
                       event.title,
-                      style: const TextStyle(
-                        fontSize: 12,
+                      style: TextStyle(
+                        fontSize: ResponsiveText.getScaledTextSize(context, 12),
                         fontWeight: FontWeight.bold,
                         height: 1.1,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  SizedBox(
+                      height: ResponsiveText.getScaledTextSize(context, 5)),
                   ShaderMask(
                     shaderCallback: (bounds) => const LinearGradient(
                       colors: [Colors.pinkAccent, Colors.blueAccent],
                     ).createShader(bounds),
                     child: Text(
                       event.description,
-                      style: const TextStyle(
-                        fontSize: 11,
+                      style: TextStyle(
+                        fontSize: ResponsiveText.getScaledTextSize(context, 11),
                         fontWeight: FontWeight.bold,
                         height: 1.1,
                       ),
                     ),
                   ),
-                  if (!isLastItem) const SizedBox(height: 4),
+                  if (!isLastItem)
+                    SizedBox(
+                        height: ResponsiveText.getScaledTextSize(context, 4)),
                 ],
               ),
             ),
