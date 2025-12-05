@@ -95,12 +95,13 @@ class _ProjectDetailState extends State<ProjectDetail>
                 ).createShader(bounds),
                 child: Text(
                   projectList[widget.index].name,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: isSmallMobile ? 18 : (isMobile ? 21 : 25),
                   ),
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -118,7 +119,7 @@ class _ProjectDetailState extends State<ProjectDetail>
                     height: 1.3,
                     fontSize: isSmallMobile ? 10 : (isMobile ? 11 : 12),
                   ),
-                  maxLines: 3,
+                  maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                 ),
@@ -239,7 +240,7 @@ class _ProjectDetailState extends State<ProjectDetail>
                 alignment: Alignment.center,
                 child: Text(
                   projectList[widget.index].projectType,
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.white,

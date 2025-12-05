@@ -35,17 +35,17 @@ List<Project> projectList = [
     'TekNow',
     'Document the history and evolution of electronic music genres while highlighting festivals. Offer a reward system where users can earn discounts on events.',
     'assets/icons/Tecknow.png',
-    'https://github.com/SebastianRodCimas/TekNow',
+    null,
     [
       'assets/icons/angular.png',
       'assets/icons/tensorflow.png',
-      'assets/icons/nodejs.png',
+      'assets/icons/php.png',
       'assets/icons/postgre.png'
     ],
     [
       'assets/images/screenshot/dgclass.png',
     ],
-    'Personal - Current project - 2025',
+    'Professional - Current project - 2025',
   ),
   Project(
     'Election Prediction AI',
@@ -86,7 +86,12 @@ List<Project> projectList = [
     'Desktop application to manage consumption and fuel rights for each customer ',
     'assets/images/alx.jpg',
     null,
-    ['assets/icons/vba.jpg', 'assets/icons/net.png', 'assets/icons/Blazor.png'],
+    [
+      'assets/icons/csharp.png',
+      'assets/icons/vba.jpg',
+      'assets/icons/net.png',
+      'assets/icons/Blazor.png'
+    ],
     null,
     'Professional - 2nd year of work-study - 2022/2023',
   ),
@@ -98,7 +103,7 @@ List<Project> projectList = [
     [
       'assets/icons/swift.png',
       'assets/icons/kotlin.png',
-      'assets/icons/xml.png',
+      'assets/icons/flutter.png',
       'assets/icons/apps.png'
     ],
     [
@@ -113,7 +118,7 @@ List<Project> projectList = [
     'Windows Forms desktop application in C# designed to manage data on courses, teachers, students, classes, timetables and carpools, optimizing school organization.',
     'assets/icons/espana.png',
     'https://github.com/SebastianRodCimas/EspanaCultura',
-    ['assets/icons/c.png', 'assets/icons/csharp.png', 'assets/icons/sql.png'],
+    ['assets/icons/net.png', 'assets/icons/csharp.png', 'assets/icons/sql.png'],
     [
       'assets/images/screenshot/mcdespana.png',
       'assets/images/screenshot/espana.png',
