@@ -319,6 +319,7 @@ class TimelinePage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: isMobile ? 8 : 10),
         ShaderMask(
           shaderCallback: (bounds) => const LinearGradient(
             colors: [Colors.pinkAccent, Colors.blueAccent],
@@ -326,10 +327,9 @@ class TimelinePage extends StatelessWidget {
           child: Text(
             event.date,
             style: TextStyle(
-              fontSize: isMobile ? 14 : 16,
-              fontWeight: FontWeight.bold,
-              height: 1.1,
-            ),
+                fontSize: isMobile ? 16 : 18,
+                fontWeight: FontWeight.bold,
+                height: 1.1),
           ),
         ),
         SizedBox(height: isMobile ? 8 : 10),

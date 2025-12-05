@@ -33,7 +33,7 @@ List<Project> projectList = [
   ),
   Project(
     'TekNow',
-    'Document the history and evolution of electronic music genres while highlighting festivals. Offer a reward system where users can earn discounts on events.',
+    'Culture of electronic music genres while highlighting festivals and offering a reward system where users can earn discounts on events.',
     'assets/icons/Tecknow.png',
     null,
     [
@@ -115,7 +115,7 @@ List<Project> projectList = [
   ),
   Project(
     'Espana Cultura',
-    'Windows Forms desktop application in C# designed to manage data on courses, teachers, students, classes, timetables and carpools, optimizing school organization.',
+    'Windows Forms desktop application in C# designed to manage data for optimizing school organization.',
     'assets/icons/espana.png',
     'https://github.com/SebastianRodCimas/EspanaCultura',
     ['assets/icons/net.png', 'assets/icons/csharp.png', 'assets/icons/sql.png'],

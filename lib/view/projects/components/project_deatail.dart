@@ -117,9 +117,9 @@ class _ProjectDetailState extends State<ProjectDetail>
                   style: TextStyle(
                     color: Colors.white70,
                     height: 1.3,
-                    fontSize: isSmallMobile ? 10 : (isMobile ? 11 : 12),
+                    fontSize: isSmallMobile ? 14 : (isMobile ? 16 : 18),
                   ),
-                  maxLines: 4,
+                  maxLines: 5,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                 ),
