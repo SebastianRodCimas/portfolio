@@ -149,7 +149,6 @@ class TimelinePage extends StatelessWidget {
   ];
 
   TimelinePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,26 +171,50 @@ class TimelinePage extends StatelessWidget {
             ),
             LayoutBuilder(
               builder: (context, constraints) {
-                if (constraints.maxWidth < 600) {
-                  // Mobile : une seule colonne
-                  return Column(
-                    children: [
-                      buildTimeline(context, events1),
-                      const SizedBox(height: 20),
-                      buildTimeline(context, events2),
-                    ],
-                  );
-                } else {
-                  // Tablette/Desktop : deux colonnes
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(child: buildTimeline(context, events1)),
-                      const SizedBox(width: 20),
-                      Expanded(child: buildTimeline(context, events2)),
-                    ],
-                  );
-                }
+                final isMobile = constraints.maxWidth < 600;
+                final avatarSize = isMobile ? 30.0 : 45.0;
+                final lineHeight = isMobile ? 60.0 : 80.0;
+
+                return isMobile
+                    ? Column(
+                        children: [
+                          _buildResponsiveTimeline(
+                            context: context,
+                            events: events1,
+                            avatarSize: avatarSize,
+                            lineHeight: lineHeight,
+                          ),
+                          const SizedBox(height: 30),
+                          _buildResponsiveTimeline(
+                            context: context,
+                            events: events2,
+                            avatarSize: avatarSize,
+                            lineHeight: lineHeight,
+                          ),
+                        ],
+                      )
+                    : Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: _buildResponsiveTimeline(
+                              context: context,
+                              events: events1,
+                              avatarSize: avatarSize,
+                              lineHeight: lineHeight,
+                            ),
+                          ),
+                          const SizedBox(width: 40),
+                          Expanded(
+                            child: _buildResponsiveTimeline(
+                              context: context,
+                              events: events2,
+                              avatarSize: avatarSize,
+                              lineHeight: lineHeight,
+                            ),
+                          ),
+                        ],
+                      );
               },
             ),
           ],
@@ -200,7 +223,12 @@ class TimelinePage extends StatelessWidget {
     );
   }
 
-  Widget buildTimeline(BuildContext context, List<TimelineEvent> events) {
+  Widget _buildResponsiveTimeline({
+    required BuildContext context,
+    required List<TimelineEvent> events,
+    required double avatarSize,
+    required double lineHeight,
+  }) {
     return Column(
       children: List.generate(events.length, (index) {
         final event = events[index];
@@ -209,82 +237,29 @@ class TimelinePage extends StatelessWidget {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              children: [
-                CircleAvatar(
-                  radius: 17,
-                  backgroundColor: event.isPersonnal
-                      ? Colors.purpleAccent
-                      : (event.isSchool
-                          ? Colors.pinkAccent
-                          : Colors.blueAccent),
-                  child: Icon(
-                    event.icon,
-                    color: Colors.white,
-                    size: ResponsiveText.getScaledTextSize(context, 17),
-                  ),
-                ),
-                if (!isLastItem)
-                  Container(
-                    width: 2,
-                    height: ResponsiveText.getScaledTextSize(context, 75),
-                    color: Colors.teal.shade700,
-                  ),
-              ],
-            ),
-            SizedBox(width: ResponsiveText.getScaledTextSize(context, 15)),
-            Expanded(
+            // Partie timeline (avatar + ligne)
+            SizedBox(
+              width: avatarSize + 20,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  ShaderMask(
-                    shaderCallback: (bounds) => const LinearGradient(
-                      colors: [Colors.pinkAccent, Colors.blueAccent],
-                    ).createShader(bounds),
-                    child: Text(
-                      event.date,
-                      style: TextStyle(
-                        fontSize: ResponsiveText.getScaledTextSize(context, 13),
-                        fontWeight: FontWeight.bold,
-                        height: 1.1,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                      height: ResponsiveText.getScaledTextSize(context, 3)),
-                  ShaderMask(
-                    shaderCallback: (bounds) => const LinearGradient(
-                      colors: [Colors.pinkAccent, Colors.blueAccent],
-                    ).createShader(bounds),
-                    child: Text(
-                      event.title,
-                      style: TextStyle(
-                        fontSize: ResponsiveText.getScaledTextSize(context, 12),
-                        fontWeight: FontWeight.bold,
-                        height: 1.1,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                      height: ResponsiveText.getScaledTextSize(context, 5)),
-                  ShaderMask(
-                    shaderCallback: (bounds) => const LinearGradient(
-                      colors: [Colors.pinkAccent, Colors.blueAccent],
-                    ).createShader(bounds),
-                    child: Text(
-                      event.description,
-                      style: TextStyle(
-                        fontSize: ResponsiveText.getScaledTextSize(context, 11),
-                        fontWeight: FontWeight.bold,
-                        height: 1.1,
-                      ),
-                    ),
+                  _buildAnimatedAvatar(
+                    event: event,
+                    size: avatarSize,
                   ),
                   if (!isLastItem)
-                    SizedBox(
-                        height: ResponsiveText.getScaledTextSize(context, 4)),
+                    AnimatedLine(
+                      maxHeight: lineHeight,
+                      duration: const Duration(milliseconds: 800),
+                    ),
                 ],
+              ),
+            ),
+            SizedBox(width: avatarSize * 0.7),
+            // Contenu textuel
+            Expanded(
+              child: _buildEventContent(
+                event: event,
+                isMobile: MediaQuery.of(context).size.width < 600,
               ),
             ),
           ],
@@ -292,6 +267,192 @@ class TimelinePage extends StatelessWidget {
       }),
     );
   }
+
+  Widget _buildAnimatedAvatar({
+    required TimelineEvent event,
+    required double size,
+  }) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween<double>(begin: 0, end: 1),
+      duration: const Duration(milliseconds: 500),
+      builder: (context, value, child) {
+        return Transform.scale(
+          scale: value,
+          child: child,
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: LinearGradient(
+            colors: [
+              (event.isPersonnal
+                      ? Colors.purpleAccent
+                      : (event.isSchool
+                          ? Colors.pinkAccent
+                          : Colors.blueAccent))
+                  .withOpacity(0.3),
+              Colors.white.withOpacity(0.2),
+            ],
+          ),
+        ),
+        child: CircleAvatar(
+          radius: size / 2,
+          backgroundColor: event.isPersonnal
+              ? Colors.purpleAccent
+              : (event.isSchool ? Colors.pinkAccent : Colors.blueAccent),
+          child: Icon(
+            event.icon,
+            color: Colors.white,
+            size: size * 0.6,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEventContent({
+    required TimelineEvent event,
+    required bool isMobile,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ShaderMask(
+          shaderCallback: (bounds) => const LinearGradient(
+            colors: [Colors.pinkAccent, Colors.blueAccent],
+          ).createShader(bounds),
+          child: Text(
+            event.date,
+            style: TextStyle(
+              fontSize: isMobile ? 14 : 16,
+              fontWeight: FontWeight.bold,
+              height: 1.1,
+            ),
+          ),
+        ),
+        SizedBox(height: isMobile ? 8 : 10),
+        ShaderMask(
+          shaderCallback: (bounds) => const LinearGradient(
+            colors: [Colors.pinkAccent, Colors.blueAccent],
+          ).createShader(bounds),
+          child: Text(
+            event.title,
+            style: TextStyle(
+              fontSize: isMobile ? 16 : 18,
+              fontWeight: FontWeight.bold,
+              height: 1.1,
+            ),
+          ),
+        ),
+        SizedBox(height: isMobile ? 10 : 12),
+        ShaderMask(
+          shaderCallback: (bounds) => const LinearGradient(
+            colors: [Colors.pinkAccent, Colors.blueAccent],
+          ).createShader(bounds),
+          child: Text(
+            event.description,
+            style: TextStyle(
+              fontSize: isMobile ? 13 : 15,
+              fontWeight: FontWeight.bold,
+              height: 1.3,
+            ),
+          ),
+        ),
+        if (!isMobile) SizedBox(height: isMobile ? 15 : 20),
+      ],
+    );
+  }
+}
+
+Widget buildTimeline(BuildContext context, List<TimelineEvent> events) {
+  return Column(
+    children: List.generate(events.length, (index) {
+      final event = events[index];
+      final isLastItem = index == events.length - 1;
+
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            children: [
+              CircleAvatar(
+                radius: 17,
+                backgroundColor: event.isPersonnal
+                    ? Colors.purpleAccent
+                    : (event.isSchool ? Colors.pinkAccent : Colors.blueAccent),
+                child: Icon(
+                  event.icon,
+                  color: Colors.white,
+                  size: ResponsiveText.getScaledTextSize(context, 17),
+                ),
+              ),
+              if (!isLastItem)
+                Container(
+                  width: 2,
+                  height: ResponsiveText.getScaledTextSize(context, 75),
+                  color: Colors.teal.shade700,
+                ),
+            ],
+          ),
+          SizedBox(width: ResponsiveText.getScaledTextSize(context, 15)),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ShaderMask(
+                  shaderCallback: (bounds) => const LinearGradient(
+                    colors: [Colors.pinkAccent, Colors.blueAccent],
+                  ).createShader(bounds),
+                  child: Text(
+                    event.date,
+                    style: TextStyle(
+                      fontSize: ResponsiveText.getScaledTextSize(context, 13),
+                      fontWeight: FontWeight.bold,
+                      height: 1.1,
+                    ),
+                  ),
+                ),
+                SizedBox(height: ResponsiveText.getScaledTextSize(context, 3)),
+                ShaderMask(
+                  shaderCallback: (bounds) => const LinearGradient(
+                    colors: [Colors.pinkAccent, Colors.blueAccent],
+                  ).createShader(bounds),
+                  child: Text(
+                    event.title,
+                    style: TextStyle(
+                      fontSize: ResponsiveText.getScaledTextSize(context, 12),
+                      fontWeight: FontWeight.bold,
+                      height: 1.1,
+                    ),
+                  ),
+                ),
+                SizedBox(height: ResponsiveText.getScaledTextSize(context, 5)),
+                ShaderMask(
+                  shaderCallback: (bounds) => const LinearGradient(
+                    colors: [Colors.pinkAccent, Colors.blueAccent],
+                  ).createShader(bounds),
+                  child: Text(
+                    event.description,
+                    style: TextStyle(
+                      fontSize: ResponsiveText.getScaledTextSize(context, 11),
+                      fontWeight: FontWeight.bold,
+                      height: 1.1,
+                    ),
+                  ),
+                ),
+                if (!isLastItem)
+                  SizedBox(
+                      height: ResponsiveText.getScaledTextSize(context, 4)),
+              ],
+            ),
+          ),
+        ],
+      );
+    }),
+  );
 }
 
 class TimelineEvent {
