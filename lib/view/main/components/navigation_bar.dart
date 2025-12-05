@@ -15,7 +15,6 @@ class TopNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool mobile = isMobile(context);
     final bool smallMobile = isSmallMobile(context);
-
     return Container(
       height: mobile ? 60 : 80,
       padding: EdgeInsets.symmetric(
@@ -25,8 +24,11 @@ class TopNavigationBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (!mobile) const Spacer(flex: 1),
+          // Bouton Email (taille originale conservée)
           _buildEmailButton(context, mobile, smallMobile),
-          if (!mobile) const Spacer(flex: 2),
+          // Espacement ajusté entre les boutons
+          SizedBox(width: mobile ? 32.0 : 64.0), // Espacement modifié ici
+          // Bouton Connect (taille originale conservée)
           const ConnectButton(),
           if (!mobile) const Spacer(flex: 1),
         ],
@@ -36,54 +38,64 @@ class TopNavigationBar extends StatelessWidget {
 
   Widget _buildEmailButton(
       BuildContext context, bool mobile, bool smallMobile) {
+    // Tailles adaptées mais gardant les mêmes proportions
+    final buttonWidth = smallMobile ? 120.0 : 150.0;
+    final buttonHeight = mobile ? 50.0 : 60.0;
+    final iconSize = smallMobile ? 12.0 : 15.0;
+    final fontSize =
+        smallMobile ? 10.0 : Theme.of(context).textTheme.labelSmall!.fontSize;
+
     return Padding(
-      padding:
-          EdgeInsets.all(smallMobile ? 2.0 : (mobile ? 4.0 : defaultPadding)),
+      padding: EdgeInsets.symmetric(
+        vertical: smallMobile ? defaultPadding / 2 : defaultPadding,
+        horizontal: smallMobile ? 2.0 : (mobile ? 4.0 : 0),
+      ),
       child: InkWell(
         onTap: () {
           launchUrl(Uri.parse('mailto:rodrigue-cimas@outlook.fr'));
         },
         borderRadius: BorderRadius.circular(defaultPadding + 10),
         child: Container(
-          height: mobile ? 45 : 60,
-          width: smallMobile ? 110 : (mobile ? 130 : 150),
+          height: buttonHeight,
+          width: buttonWidth,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(defaultPadding),
-            gradient: const LinearGradient(colors: [
+            gradient: LinearGradient(colors: [
               Colors.pink,
-              Colors.blue,
+              Colors.blue.shade900,
             ]),
             boxShadow: const [
               BoxShadow(
                 color: Colors.blue,
                 offset: Offset(0, -1),
-                blurRadius: 2,
+                blurRadius: defaultPadding / 4,
               ),
               BoxShadow(
                 color: Colors.red,
                 offset: Offset(0, 1),
-                blurRadius: 2,
+                blurRadius: defaultPadding / 4,
               ),
             ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
                 Icons.email,
                 color: Colors.greenAccent,
-                size: smallMobile ? 12 : (mobile ? 14 : 15),
+                size: iconSize,
               ),
               SizedBox(
-                  width: smallMobile ? 4 : (mobile ? 6 : defaultPadding / 2)),
+                  width: smallMobile ? defaultPadding / 4 : defaultPadding / 2),
               Text(
                 'Email',
-                style: TextStyle(
-                  color: Colors.white,
-                  letterSpacing: smallMobile ? 0.8 : 1.2,
-                  fontWeight: FontWeight.bold,
-                  fontSize: smallMobile ? 9 : (mobile ? 10 : 12),
-                ),
+                style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                      color: Colors.white,
+                      letterSpacing: smallMobile ? 0.8 : 1.2,
+                      fontWeight: FontWeight.bold,
+                      fontSize: fontSize,
+                    ),
               ),
             ],
           ),

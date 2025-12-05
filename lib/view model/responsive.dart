@@ -58,10 +58,10 @@ class ResponsiveText {
   static double getScaledTextSize(
     BuildContext context,
     double baseSize, {
-    double minScale = 0.9,
-    double maxScale = 1.2,
-    double breakpointMin = 320,
-    double breakpointMax = 1024,
+    double minScale = 1,
+    double maxScale = 1.7,
+    double breakpointMin = 400,
+    double breakpointMax = 1280,
   }) {
     final screenWidth = MediaQuery.of(context).size.width;
 
