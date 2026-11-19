@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AnimatedLoadingText extends StatelessWidget {
   const AnimatedLoadingText({super.key});

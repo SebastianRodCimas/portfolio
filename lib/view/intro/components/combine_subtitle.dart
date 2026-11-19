@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_portfolio/view/intro/components/subtitle_text.dart';
 
 class CombineSubtitleText extends StatelessWidget {

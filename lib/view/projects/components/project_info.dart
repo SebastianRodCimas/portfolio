@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_portfolio/view/projects/components/project_deatail.dart';
 import 'package:get/get.dart';
 import '../../../res/constants.dart';

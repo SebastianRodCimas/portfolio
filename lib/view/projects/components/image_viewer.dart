@@ -1,5 +1,5 @@
 import 'package:photo_view/photo_view.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ImageViewer {
   ImageViewer(BuildContext context, String image) {

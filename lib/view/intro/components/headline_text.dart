@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class MyPortfolioText extends StatelessWidget {
   const MyPortfolioText({super.key, required this.start, required this.end});
