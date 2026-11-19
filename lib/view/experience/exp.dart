@@ -292,8 +292,8 @@ class TimelinePage extends StatelessWidget {
                       : (event.isSchool
                           ? Colors.pinkAccent
                           : Colors.blueAccent))
-                  .withOpacity(0.3),
-              Colors.white.withOpacity(0.2),
+                  .withValues(alpha: 0.3),
+              Colors.white.withValues(alpha: 0.2),
             ],
           ),
         ),

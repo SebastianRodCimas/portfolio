@@ -42,7 +42,7 @@ class DownloadButton extends StatelessWidget {
             SizedBox(
               width: padding / 3,
             ),
-            const Icon(
+            const FaIcon(
               FontAwesomeIcons.download,
               color: Colors.white70,
               size: 15,
