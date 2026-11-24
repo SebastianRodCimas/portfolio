@@ -19,6 +19,7 @@ class _ProjectDetailState extends State<ProjectDetail>
   // Programming Language Icons with Continuous Animation
   // Définir des tailles spécifiques pour chaque projet
   Map<String, double> logoSizes = {
+    'Serveo': 50,
     'SCALIA Mobile': 40,
     'TekNow': 50,
     'Election Prediction AI': 55, // Projet avec des icônes plus grandes
@@ -26,7 +27,6 @@ class _ProjectDetailState extends State<ProjectDetail>
     'Logiciel ALX Technology': 50,
     'Customer File Management': 40,
     'Espana Cultura': 50,
-    'Agile IT Project Management': 50,
   };
 
 // Taille par défaut si un projet n'est pas dans la liste
@@ -40,7 +40,7 @@ class _ProjectDetailState extends State<ProjectDetail>
     'Logiciel ALX Technology': 160,
     'Customer File Management': 90,
     'Espana Cultura': 80,
-    'Agile IT Project Management': 65,
+    'Serveo': 65,
   };
 
 // Taille par défaut si un projet n'est pas dans la liste
@@ -72,7 +72,7 @@ class _ProjectDetailState extends State<ProjectDetail>
       'Logiciel ALX Technology': 60, // Augmenté de 50 à 60
       'Customer File Management': 50, // Augmenté de 40 à 50
       'Espana Cultura': 60, // Augmenté de 50 à 60
-      'Agile IT Project Management': 60, // Augmenté de 50 à 60
+      'Serveo': 60, // Augmenté de 50 à 60
     };
 
     double updatedDefaultSize = 50; // Augmenté de 40 à 50

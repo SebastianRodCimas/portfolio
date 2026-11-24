@@ -12,6 +12,23 @@ class Project {
 
 List<Project> projectList = [
   Project(
+    ' CEA - SERVEO',
+    'Modernize Information System with a modular architecture to optimize stocks, automation, and customer relations.',
+    'assets/images/logo_cea.png',
+    null,
+    [
+      'assets/icons/kanban.png',
+      'assets/images/logiciel/ganttproject.png',
+      'assets/icons/risque.png'
+    ],
+    [
+      'assets/images/screenshot/strategie.png',
+      'assets/images/screenshot/gantt.png',
+      'assets/images/screenshot/risque.png'
+    ],
+    "School - Mai 2026 - Aujourd'hui",
+  ),
+  Project(
     'SCALIA Mobile',
     'Creation of a mobile application to visualize surveillance cameras with user preferences, from design to hosting.',
     'assets/icons/scalialogo.png',
@@ -125,22 +142,5 @@ List<Project> projectList = [
       'assets/images/screenshot/sqlespana.png'
     ],
     'Personal - 1nd year of bachelor degree - 2021',
-  ),
-  Project(
-    'Agile IT Project Management',
-    'Modernize Information System with a modular architecture to optimize stocks, automation, and customer relations.',
-    'assets/images/mains.png',
-    null,
-    [
-      'assets/icons/kanban.png',
-      'assets/images/logiciel/ganttproject.png',
-      'assets/icons/risque.png'
-    ],
-    [
-      'assets/images/screenshot/strategie.png',
-      'assets/images/screenshot/gantt.png',
-      'assets/images/screenshot/risque.png'
-    ],
-    'School - 2nd year master - 2024',
   ),
 ];

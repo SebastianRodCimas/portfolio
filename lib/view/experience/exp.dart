@@ -4,6 +4,7 @@ import 'package:flutter_portfolio/res/constants.dart';
 import 'package:flutter_portfolio/view%20model/responsive.dart';
 import 'package:flutter_portfolio/view/main/components/navigation_bar.dart';
 import 'package:flutter_portfolio/view/main/components/navigation_button_list.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AnimatedLine extends StatefulWidget {
   final double maxHeight;
@@ -65,13 +66,29 @@ class _AnimatedLineState extends State<AnimatedLine>
 class TimelinePage extends StatelessWidget {
   final List<TimelineEvent> events1 = [
     TimelineEvent(
-      title: "Mobile Developer Intern - Syrius Solar Industry",
-      date: "September 2021 - September 2022",
+        title: "Consultant Informatique - Flow Factory : Client : CEA",
+        date: "Mai 2026 - Today",
+        description:
+            "Développeur d’applications web au sein de Flow Factory, en mission au CEA Cadarache (applications internes)",
+        isSchool: false,
+        isPersonnal: false,
+        svgAsset: "assets/icons/radiation-solid-full.svg"),
+    TimelineEvent(
+      title: "EPSI Montpellier - EISI Program",
+      date: "September 2019 - November 2024 RNCP36286 Certification Level 7",
+      description: "Training in computer science and information systems.",
+      isSchool: true,
+      isPersonnal: false,
+      icon: Icons.school,
+    ),
+    TimelineEvent(
+      title: "Mobile Developer Intern - STIM",
+      date: "June 2023 - October 2024",
       description:
-          "Created mobile applications for sales representatives to facilitate and improve customer file management.",
+          "Developed a mobile application to manage and view surveillance cameras.",
       isSchool: false,
       isPersonnal: false,
-      icon: Icons.work,
+      icon: Icons.camera_indoor_rounded,
     ),
     TimelineEvent(
       title: "EPSI Montpellier - EISI Program",
@@ -88,24 +105,16 @@ class TimelinePage extends StatelessWidget {
           "Developed desktop applications to improve quality for clients.",
       isSchool: false,
       isPersonnal: false,
-      icon: Icons.work,
+      icon: Icons.car_crash,
     ),
     TimelineEvent(
-      title: "Mobile Developer Intern - STIM",
-      date: "June 2023 - October 2024",
+      title: "Mobile Developer Intern - Syrius Solar Industry",
+      date: "September 2021 - September 2022",
       description:
-          "Developed a mobile application to manage and view surveillance cameras.",
+          "Created mobile applications for sales representatives to facilitate and improve customer file management.",
       isSchool: false,
       isPersonnal: false,
-      icon: Icons.work,
-    ),
-    TimelineEvent(
-      title: "EPSI Montpellier - EISI Program",
-      date: "September 2019 - November 2024 RNCP36286 Certification Level 7",
-      description: "Training in computer science and information systems.",
-      isSchool: true,
-      isPersonnal: false,
-      icon: Icons.school,
+      icon: Icons.solar_power,
     ),
   ];
 
@@ -461,7 +470,8 @@ class TimelineEvent {
   final String description;
   final bool isSchool;
   final bool isPersonnal;
-  final IconData icon;
+  final IconData? icon;
+  final String? svgAsset;
 
   TimelineEvent({
     required this.title,
@@ -469,6 +479,20 @@ class TimelineEvent {
     required this.description,
     required this.isSchool,
     required this.isPersonnal,
-    required this.icon,
-  });
+    this.icon,
+    this.svgAsset,
+  }) : assert(icon != null || svgAsset != null,
+            'Provide either icon or svgAsset');
+
+  Widget buildIcon({required Color color, required double size}) {
+    if (svgAsset != null) {
+      return SvgPicture.asset(
+        svgAsset!,
+        width: size,
+        height: size,
+        colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+      );
+    }
+    return Icon(icon, color: color, size: size);
+  }
 }
